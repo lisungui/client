@@ -66,8 +66,9 @@ const SignIn = () => {
     if (email && password) {
       try {
         await signInWithEmailAndPassword(auth, email, password);
+        
+        navigate("/home");
         console.log("Signed in with Email and Password");
-        <Navigate to="/home" />
       } catch (error) {
         console.error("Error signing in with Email and Password", error);
         console.error("Error code: ", error.code);
