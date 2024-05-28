@@ -3,7 +3,7 @@ import { getDomain } from "helpers/getDomain";
 
 export const api = axios.create({
   baseURL: getDomain(),
-  headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+  headers: { "Content-Type": "application/json" }
 });
 
 export const handleError = error => {
