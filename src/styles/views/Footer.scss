@@ -1,0 +1,93 @@
+.footer {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 0; // Reduced padding to decrease overall height
+  text-align: center;
+  width: 100%; // Ensure it spans the full width of the container
+
+  .footer-content {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .footer-section {
+    flex: 1;
+    min-width: 200px;
+    margin: 10px; // Reduced margin to decrease spacing between sections
+
+    h2 {
+      margin-bottom: 8px; // Slightly reduce space below headings
+      font-size: 18px;
+      color: #fff;
+    }
+
+    p {
+      font-size: 14px;
+      color: #bbb;
+    }
+
+    ul {
+      list-style-type: none; /* Remove bullet points */
+      padding: 0;
+      display: flex; /* Flex to align items in a row */
+      flex-wrap: wrap; /* Wrap items to next line if needed */
+      gap: 10px; /* Gap between items */
+    }
+
+    a {
+      color: #1e90ff; /* Link color */
+      text-decoration: none;
+
+      &:hover {
+        color: #fff;
+      }
+    }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 15px; // Slightly reduced gap between icons
+      margin-top: 10px;
+
+      a {
+        color: #bbb;
+        transition: color 0.3s, transform 0.3s; /* Smooth transitions */
+
+        &:hover {
+          color: #fff;
+          transform: scale(0.9); /* Slightly shrink on hover */
+        }
+
+        svg {
+          transition: color 0.3s, transform 0.3s; /* Smooth transitions for SVGs */
+        }
+      }
+    }
+
+    .fa-linkedin {
+      color: #0077b5; /* LinkedIn blue */
+    }
+
+    .fa-github {
+      color: #f5f5f5; /* Light grey for GitHub */
+    }
+
+    .fa-envelope {
+      color: #d44638; /* Gmail red */
+    }
+
+    .fa-instagram {
+      color: #c13584; /* Instagram color */
+    }
+  }
+
+  .footer-bottom {
+    margin-top: 15px; // Slightly reduced margin-top for more compact spacing
+    font-size: 14px;
+    color: #bbb;
+  }
+}
+

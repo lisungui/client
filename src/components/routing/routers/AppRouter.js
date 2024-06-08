@@ -17,6 +17,7 @@ import SignIn from "../../views/SignIn";
 import GameRouter from "./GameRouter";
 import Freelancer from "../../views/Freelancer";
 import ViewFreelancer from "../../views/ViewFreelance";
+import Contact from "../../views/Contact";
 
 const AppRouter = () => {
   return (
@@ -28,6 +29,7 @@ const AppRouter = () => {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/contact" element={<Contact />} />
 
           <Route
             path="/home"

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { ReactLogo } from "../ui/ReactLogo";
 import { api, handleError } from "helpers/api";
 import PropTypes from "prop-types";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -7,10 +6,10 @@ import "../../styles/views/Header.scss";
 import { auth } from "../../firebaseConfig";
 import { onAuthStateChanged, User } from "firebase/auth";
 
-const Header = (props) => {
+const Header: React.FC<{ height?: string }> = (props) => {
   const navigate = useNavigate();
-  const location = useLocation()
-  const [picture, setPicture] = useState(null);
+  const location = useLocation();
+  const [picture, setPicture] = useState<string | null>(null);
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
@@ -30,16 +29,7 @@ const Header = (props) => {
     navigate(`/user/${user?.uid}`);
   };
 
-  const navigateHome = () => {
-    if (
-      !location.pathname.includes("game") &&
-      !location.pathname.includes("joined") &&
-      !location.pathname.includes("host")
-    ) {
-      navigate("/home");
-    }
-  };
-
+  // Determine if back button should be shown
   const shouldShowBackButton = ["/lobby/join", "/lobby/create", "/user/"].some(
     (path) => {
       if (path === location.pathname) {
@@ -57,6 +47,7 @@ const Header = (props) => {
     }
   );
 
+  // Determine if profile button should be shown
   const shouldShowProfileButton = !(
     location.pathname.includes("game") ||
     location.pathname.includes("host") ||
@@ -92,13 +83,9 @@ const Header = (props) => {
     }
 
     fetchData();
-    // const interval = setInterval(fetchData, 1000); // Poll every 1 seconds
+  }, [user?.uid, shouldShowProfileButton]);
 
-    // Clean up interval on component unmount
-    // return () => clearInterval(interval);
-  }, [user?.uid]);
-
-  const formatBase64Image = (base64) => {
+  const formatBase64Image = (base64: string) => {
     if (!base64.startsWith("data:image/")) {
       return `data:image/jpeg;base64,${base64}`;
     }
@@ -125,16 +112,14 @@ const Header = (props) => {
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                d="M15.75 19.5 8.25 12l7.5-7.5"
+                d="M15.75 19.5L8.25 12l7.5-7.5"
               />
             </svg>
             Back
           </button>
         )}
       </div>
-      <h1 onClick={() => navigateHome()} className="header title">
-        Lisungui
-      </h1>
+      <h1 className="header title">Lisungui</h1>
       <div className="profile-button-container">
         {shouldShowProfileButton && (
           <button
@@ -185,3 +170,4 @@ Header.propTypes = {
 };
 
 export default Header;
+

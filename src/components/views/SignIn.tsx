@@ -1,11 +1,13 @@
-// src/SignIn.tsx
 import React, { useState } from "react";
 import { auth, googleProvider, githubProvider } from "../../firebaseConfig";
 import { signInWithPopup, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
 import { Button } from "components/ui/Button";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGoogle, faGithub } from "@fortawesome/free-brands-svg-icons"; // Import the icons
+import "styles/views/SignIn.scss"; // Import the updated SCSS file
 
 const FormField = (props) => {
   return (
@@ -39,7 +41,7 @@ const SignIn = () => {
   const signInWithGoogle = async () => {
     try {
       await signInWithPopup(auth, googleProvider);
-      console.log("Signed in with Google");
+      console.log(isSignUp ? "Signed up with Google" : "Signed in with Google");
       navigate("/home");
     } catch (error) {
       console.error("Error signing in with Google", error);
@@ -49,7 +51,7 @@ const SignIn = () => {
   const signInWithGithub = async () => {
     try {
       await signInWithPopup(auth, githubProvider);
-      console.log("Signed in with GitHub");
+      console.log(isSignUp ? "Signed up with GitHub" : "Signed in with GitHub");
       navigate("/home");
     } catch (error) {
       console.error("Error signing in with GitHub", error);
@@ -66,7 +68,6 @@ const SignIn = () => {
     if (email && password) {
       try {
         await signInWithEmailAndPassword(auth, email, password);
-        
         navigate("/home");
         console.log("Signed in with Email and Password");
       } catch (error) {
@@ -115,7 +116,6 @@ const SignIn = () => {
         else {
           setError(error.message);
         }
-        
       }
     }
   };
@@ -148,17 +148,29 @@ const SignIn = () => {
           </div>
           <div className="register button-container">
             <p className="register prompt">
-              {isSignUp ? "Already have an account?" : "Don't have an account?"} <a href="#" onClick={(e) => {
-                e.preventDefault();
-                setIsSignUp(!isSignUp);
-              }}>{isSignUp ? "Login" : "Sign Up"}</a>
+              {isSignUp ? "Already have an account?" : "Don't have an account yet?"}{" "}
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsSignUp(!isSignUp);
+                }}
+              >
+                {isSignUp ? "Login" : "Sign Up"}
+              </a>
             </p>
           </div>
         </div>
-        <p>OR</p>
-        <div className="register button-container">
-          <Button onClick={signInWithGoogle}>Sign in with Google</Button>
-          <Button onClick={signInWithGithub}>Sign in with GitHub</Button>
+        <p className="or-container">OR</p> {/* Use the new class for styling */}
+        <div className="social-buttons">
+          <Button onClick={signInWithGoogle}>
+            <FontAwesomeIcon icon={faGoogle} style={{ marginRight: "10px" }} />
+            {isSignUp ? "Sign Up with Google" : "Sign In with Google"}
+          </Button>
+          <Button onClick={signInWithGithub}>
+            <FontAwesomeIcon icon={faGithub} style={{ marginRight: "10px" }} />
+            {isSignUp ? "Sign Up with GitHub" : "Sign In with GitHub"}
+          </Button>
         </div>
       </div>
     </BaseContainer>

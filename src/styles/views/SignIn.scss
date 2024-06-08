@@ -1,0 +1,178 @@
+@import "../theme"; // Optional: Replace with the actual path if you have a theme file
+
+// Styling for the main sign-in container
+.register.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh; // Reduced height to 50% of the viewport height
+  padding: 15px; // Reduced padding for a more compact look
+  background-color: #fff; // White background color
+  color: #000; // Black text color for all elements inside the container
+  border-radius: 12px; // Rounded corners
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); // Subtle shadow for depth
+  max-width: 400px; // Reduced max-width for a smaller container
+  width: 80%; // Use a percentage width for responsiveness
+  margin: 80px auto 0; // Increase the top margin to create more space from the header
+
+  h2 {
+    color: #000; // Black heading color
+    margin-bottom: 10px; // Spacing below the heading
+  }
+
+  h4 {
+    color: #555; // Dark gray subheading color for slight contrast
+    margin-bottom: 15px; // Reduced spacing below the subheading
+  }
+
+  .register.form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .register.field {
+      width: 100%;
+      margin-bottom: 10px; // Reduced spacing between form fields
+
+      .register.label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #333; // Dark gray label color for contrast
+      }
+
+      .register.input {
+        width: 100%;
+        padding: 8px; // Reduced padding for a smaller input
+        border: 1px solid #ccc; // Light gray border color for inputs
+        border-radius: 6px; // Rounded input edges
+        font-size: 1rem;
+        box-sizing: border-box; // Include padding and border in the element's width and height
+        background-color: #fff; // White input background to match the container
+        color: #000; // Black input text color
+
+        &:focus {
+          border-color: #6c5ce7; // Border color on focus
+          outline: none; // Remove default focus outline
+          box-shadow: 0 0 5px rgba(108, 92, 231, 0.5); // Focused shadow
+        }
+      }
+    }
+
+    .register.button-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column; // Ensure buttons stack vertically
+      align-items: center;
+      margin: 10px 0; // Reduced spacing between button sections
+
+      .button {
+        width: 100%;
+        max-width: 180px; // Reduced max-width for a more compact button
+        padding: 8px; // Reduced padding for smaller buttons
+        background-color: #6c5ce7; // Primary button color
+        color: #fff; // Button text color
+        border: none;
+        border-radius: 8px; // Rounded button edges
+        font-size: 1rem; // Button text size
+        font-weight: bold; // Bold text
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s; // Smooth transition for hover effects
+        margin-bottom: 10px; // Add space below each button
+
+        &:hover {
+          background-color: #a29bfe; // Lighter shade on hover
+          transform: scale(1.05); // Slightly enlarge on hover
+        }
+
+        &:focus {
+          outline: none; // Remove default focus outline
+          box-shadow: 0 0 5px rgba(108, 92, 231, 0.5); // Focused shadow
+        }
+
+        &:disabled {
+          background-color: #ccc; // Disabled button color
+          cursor: not-allowed; // Not-allowed cursor on disabled button
+        }
+      }
+
+      .register.prompt {
+        color: #333; // Dark gray prompt text color for contrast
+        margin-top: 10px; // Spacing above the prompt
+
+        a {
+          color: #6c5ce7; // Link color
+          text-decoration: none;
+
+          &:hover {
+            text-decoration: underline; // Underline on hover
+          }
+        }
+      }
+    }
+  }
+
+  p.or-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin: 15px 0; // Spacing around the paragraph
+    font-size: 1rem;
+    color: #333; // Dark gray text color for the "OR"
+
+    &::before, &::after {
+      content: "";
+      flex: 1;
+      border-bottom: 2px solid #000; // Solid black line for contrast
+      margin: 0 10px; // Space between the lines and the text
+    }
+  }
+
+  .social-buttons {
+    display: flex;
+    flex-direction: row; // Ensure the buttons are side by side
+    justify-content: space-between; // Space the buttons out evenly
+    gap: 10px; // Add space between the buttons
+    width: 100%; // Take full width for consistent spacing
+    align-items: center; // Center align the buttons
+
+    // Style for the individual social buttons
+    .button {
+      flex: 1; // Allow buttons to grow evenly
+      max-width: 48%; // Ensure they fit within the container with a gap
+
+      // Specific styles for Google and GitHub buttons
+      &.google,
+      &.github {
+        background-color: #fff; // White background
+        color: #000; // Black text color
+        border: 1px solid #000; // Black border
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+          background-color: #f0f0f0; // Slightly darker shade on hover
+          transform: scale(1.05); // Slightly enlarge on hover
+        }
+
+        &:focus {
+          outline: none; // Remove default focus outline
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); // Darker focused shadow
+        }
+
+        &:disabled {
+          background-color: #e0e0e0; // Gray background for disabled state
+          cursor: not-allowed; // Not-allowed cursor on disabled button
+        }
+
+        svg {
+          margin-right: 8px; // Space between the icon and the text
+        }
+      }
+    }
+  }
+}
+

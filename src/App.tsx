@@ -1,17 +1,15 @@
 import React from "react";
 import AppRouter from "./components/routing/routers/AppRouter";
+import Footer from "./components/views/Footer";
+import "./App.scss"; // Import the SCSS file
 
-
-/**
- * Happy coding!
- * React Template by Lucas Pelloni
- * Overhauled by Kyrill Hux
- * Updated by Marco Leder
- */
 const App = () => {
   return (
-    <div>
-      <AppRouter />
+    <div className="app-container">
+      <div className="content-container">
+        <AppRouter />
+      </div>
+      <Footer />
     </div>
   );
 };

@@ -1,0 +1,19 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; // Full height of the viewport
+}
+
+.content-container {
+  background-color: white; // Main content background
+  flex-grow: 1; // Expand to take the available space
+  padding: 20px; // Optional padding
+  margin: 0; // Ensure no margin is pushing it away from the edges
+}
+
+// Optional: Ensure the header and footer don't shrink
+header, footer {
+  flex-shrink: 0; // Prevent shrinking
+}
+
+  
