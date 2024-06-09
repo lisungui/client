@@ -22,6 +22,7 @@ import HomePage from "../../views/HomePage";
 import Dashboard from "../../views/Dashboard";
 import Faqs from "../../views/Faqs";
 import About from "../../views/About";
+import NotFound from "../../views/NotFound";
 
 const AppRouter = () => {
   return (
@@ -40,6 +41,11 @@ const AppRouter = () => {
             element={
               <HomePage />
             }
+          />
+
+          <Route 
+            path="*" 
+            element={<NotFound />} 
           />
 
           <Route
