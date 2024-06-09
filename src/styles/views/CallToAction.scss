@@ -1,0 +1,72 @@
+// CallToAction.scss
+
+.call-to-action {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    background-color: #ffffff; // White background to stand out
+  
+    .cta-content {
+      text-align: center;
+      margin-bottom: 30px; // Space between sections
+    }
+  
+    .cta-title {
+      font-size: 2.5rem;
+      color: #333; // Dark text color
+      margin-bottom: 20px; // Space after the title
+    }
+  
+    .cta-description {
+      font-size: 1.2rem;
+      color: #666; // Medium text color
+      margin-bottom: 30px; // Space after the description
+    }
+  
+    .cta-button {
+      padding: 10px 20px;
+      font-size: 1.2rem;
+      color: #fff;
+      background-color: #4caf50; // Green background for the button
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+  
+      &:hover {
+        background-color: #45a049; // Darker green on hover
+      }
+    }
+  
+    .why-choose-us {
+      text-align: center;
+  
+      h3 {
+        font-size: 2rem;
+        color: #333; // Dark text color
+        margin-bottom: 20px; // Space after the heading
+      }
+  
+      .reasons-list {
+        list-style: none;
+        padding: 0;
+  
+        li {
+          font-size: 1.2rem;
+          color: #333; // Dark text color
+          margin: 10px 0; // Space between list items
+          display: flex;
+          align-items: center;
+          justify-content: center;
+  
+          &:before {
+            content: "✔️"; // Checkmark symbol
+            margin-right: 10px; // Space between symbol and text
+            color: #4caf50; // Green color for checkmark
+          }
+        }
+      }
+    }
+  }
+  

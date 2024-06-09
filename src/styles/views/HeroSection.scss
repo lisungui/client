@@ -1,0 +1,76 @@
+// HeroSection.scss
+
+.hero-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 80vh; // Adjust height as necessary
+    background-image: url("../../assets/swiss6.jpeg"); // Update the path to point to the correct location
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #fff; // White text color for contrast against the banner
+  
+    .hero-content {
+      max-width: 600px; // Max width to keep content centered and not too wide
+      margin: 0 auto;
+      padding: 20px; // Padding for inner content spacing
+      background-color: rgba(0, 0, 0, 0.6); // Slightly dark background to improve text readability
+      border-radius: 10px;
+  
+      .hero-title {
+        font-size: 2.5rem; // Large title text
+        margin-bottom: 20px;
+      }
+  
+      .hero-subtitle {
+        font-size: 1.2rem; // Subtitle text
+        margin-bottom: 30px;
+      }
+  
+      .cta-buttons {
+        display: flex;
+        gap: 10px; // Space between buttons
+        justify-content: center;
+  
+        .cta-button {
+          padding: 10px 20px;
+          font-size: 1rem;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+  
+          &.primary {
+            background-color: #4caf50; // Green background
+            color: #fff;
+  
+            &:hover {
+              background-color: #45a049; // Darker green on hover
+            }
+          }
+  
+          &.secondary {
+            background-color: #007bff; // Blue background
+            color: #fff;
+  
+            &:hover {
+              background-color: #0069d9; // Darker blue on hover
+            }
+          }
+  
+          &.tertiary {
+            background-color: transparent;
+            border: 2px solid #fff; // White border for the tertiary button
+            color: #fff;
+  
+            &:hover {
+              background-color: rgba(255, 255, 255, 0.2); // Slightly white background on hover
+            }
+          }
+        }
+      }
+    }
+  }
+  

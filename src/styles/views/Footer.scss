@@ -1,93 +1,116 @@
+// Footer.scss
+
 .footer {
   background-color: #333;
   color: #fff;
-  padding: 10px 0; // Reduced padding to decrease overall height
+  padding: 20px 0;
   text-align: center;
-  width: 100%; // Ensure it spans the full width of the container
+  width: 100%;
 
   .footer-content {
     display: flex;
-    justify-content: space-around;
     flex-wrap: wrap;
+    justify-content: space-around;
     max-width: 1200px;
     margin: 0 auto;
+    padding: 20px;
   }
 
   .footer-section {
     flex: 1;
-    min-width: 200px;
-    margin: 10px; // Reduced margin to decrease spacing between sections
+    min-width: 220px;
+    margin: 10px;
+    color: #bbb;
 
     h2 {
-      margin-bottom: 8px; // Slightly reduce space below headings
-      font-size: 18px;
+      margin-bottom: 10px;
+      font-size: 20px;
       color: #fff;
     }
 
     p {
       font-size: 14px;
-      color: #bbb;
+      color: #ddd;
     }
 
     ul {
-      list-style-type: none; /* Remove bullet points */
+      list-style-type: none;
       padding: 0;
-      display: flex; /* Flex to align items in a row */
-      flex-wrap: wrap; /* Wrap items to next line if needed */
-      gap: 10px; /* Gap between items */
-    }
+      margin: 0;
 
-    a {
-      color: #1e90ff; /* Link color */
-      text-decoration: none;
+      li {
+        margin-bottom: 8px;
 
-      &:hover {
-        color: #fff;
+        a {
+          color: #1e90ff;
+          text-decoration: none;
+
+          &:hover {
+            color: #fff;
+          }
+        }
       }
     }
 
     .social-icons {
       display: flex;
       justify-content: center;
-      gap: 15px; // Slightly reduced gap between icons
+      gap: 15px;
       margin-top: 10px;
 
       a {
         color: #bbb;
-        transition: color 0.3s, transform 0.3s; /* Smooth transitions */
+        transition: color 0.3s, transform 0.3s;
 
         &:hover {
           color: #fff;
-          transform: scale(0.9); /* Slightly shrink on hover */
-        }
-
-        svg {
-          transition: color 0.3s, transform 0.3s; /* Smooth transitions for SVGs */
+          transform: scale(1.1);
         }
       }
     }
+  }
 
-    .fa-linkedin {
-      color: #0077b5; /* LinkedIn blue */
-    }
+  .newsletter {
+    text-align: left;
 
-    .fa-github {
-      color: #f5f5f5; /* Light grey for GitHub */
-    }
+    .newsletter-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
 
-    .fa-envelope {
-      color: #d44638; /* Gmail red */
-    }
+      input[type="email"] {
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        font-size: 14px;
 
-    .fa-instagram {
-      color: #c13584; /* Instagram color */
+        &:focus {
+          outline: none;
+          border-color: #4caf50;
+        }
+      }
+
+      button {
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #4caf50;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.3s;
+
+        &:hover {
+          background-color: #45a049;
+        }
+      }
     }
   }
 
   .footer-bottom {
-    margin-top: 15px; // Slightly reduced margin-top for more compact spacing
+    margin-top: 20px;
     font-size: 14px;
     color: #bbb;
   }
 }
+
 

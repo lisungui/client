@@ -1,0 +1,65 @@
+.about-container {
+    padding: 40px 20px;
+    background-color: #f9f9f9; // Light background for the about section
+    color: #333; // Default text color
+    line-height: 1.6; // Improve readability with a comfortable line height
+  
+    h1, h2 {
+      text-align: center;
+      color: #4caf50; // Green color for headings
+    }
+  
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+  
+    h2 {
+      font-size: 2rem;
+      margin: 20px 0;
+    }
+  
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+      color: #666; // Slightly lighter text color for paragraphs
+      text-align: justify; // Justify the text for a clean look
+    }
+  
+    ul {
+      list-style: disc inside;
+      padding: 0;
+      margin: 20px 0;
+  
+      li {
+        margin-bottom: 10px;
+        font-size: 1.1rem;
+        color: #333; // Dark text color for list items
+  
+        strong {
+          color: #4caf50; // Green color for emphasized text
+        }
+      }
+    }
+  
+    a {
+      color: #1e90ff; // Link color
+  
+      &:hover {
+        color: #0056b3; // Darker blue on hover
+      }
+    }
+  
+    .mission-section, .values-section, .benefits-section, .contact-section {
+      margin-bottom: 30px; // Space between sections
+    }
+  
+    .values-section ul, .benefits-section ul {
+      padding-left: 20px; // Indent list for values and benefits sections
+    }
+  
+    .contact-section {
+      text-align: center; // Center align the contact section
+    }
+  }
+  

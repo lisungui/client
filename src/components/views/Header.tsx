@@ -6,6 +6,8 @@ import { auth } from "../../firebaseConfig";
 import { onAuthStateChanged, User, signOut } from "firebase/auth";
 import { Button } from "components/ui/Button";
 import { api, handleError } from "helpers/api";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSignOutAlt, faUserCircle } from "@fortawesome/free-solid-svg-icons";
 
 const Header: React.FC<{ height?: string }> = (props) => {
   const navigate = useNavigate();
@@ -27,28 +29,18 @@ const Header: React.FC<{ height?: string }> = (props) => {
   }, []);
 
   const navigateToHome = () => {
-    if (user) {
-      navigate("/home");
-    } else {
-      navigate("/");
-    }
+    navigate(user ? "/home" : "/");
   };
 
   const navigateToCreateFreelance = async () => {
     try {
-      const response = await api.post("/createfreelance", { uid: user.uid });
+      await api.post("/createfreelance", { uid: user?.uid });
       navigate("/freelancers");
     } catch (error) {
       console.error(
         `Something went wrong while fetching the user data: \n${handleError(error)}`
       );
-      console.error("Details:", error);
-      const errorMessage =
-        error.response?.data?.message ||
-        error.response?.data ||
-        error.message ||
-        "An unknown error occurred";
-      alert(`${errorMessage}`);
+      alert("An error occurred while creating a freelancer profile.");
     }
   };
 
@@ -64,7 +56,7 @@ const Header: React.FC<{ height?: string }> = (props) => {
   const handleLogout = async () => {
     try {
       await signOut(auth);
-      navigate("/login"); // Redirect to login page after logout
+      navigate("/"); // Redirect to home page after logout
     } catch (error) {
       console.error("Error logging out:", error);
     }
@@ -72,21 +64,29 @@ const Header: React.FC<{ height?: string }> = (props) => {
 
   return (
     <div className="header" style={{ height: props.height }}>
-      <div className="left-section">
-        <h1 className="title">Lisungui</h1> {/* Title is not a clickable link */}
+      <div className="left-section" onClick={navigateToHome} style={{ cursor: "pointer" }}>
+        <h1 className="title">Lisungui</h1>
       </div>
       <div className="middle-section">
         <Button onClick={navigateToHome} className="nav-button">
           Home
         </Button>
         {user && (
-          <Button onClick={navigateToCreateFreelance} className="nav-button">
-            Join as a Freelancer
-          </Button>
+          <>
+            <Button onClick={() => navigate("/dashboard")} className="nav-button">
+              Dashboard
+            </Button>
+            <Button onClick={() => navigate("/my-gigs")} className="nav-button">
+              My Gigs
+            </Button>
+            <Button onClick={() => navigate("/messages")} className="nav-button">
+              Messages
+            </Button>
+            <Button onClick={navigateToCreateFreelance} className="nav-button">
+              Join as a Freelancer
+            </Button>
+          </>
         )}
-        <Button onClick={() => navigate("/about")} className="nav-button">
-          About
-        </Button>
         <Button onClick={() => navigate("/contact")} className="nav-button">
           Contact Us
         </Button>
@@ -98,26 +98,21 @@ const Header: React.FC<{ height?: string }> = (props) => {
       </div>
       <div className="right-section">
         {user ? (
-          <Button className="profile-button" onClick={() => navigate(`/user/${user.uid}`)}>
-            {picture ? (
-              <img src={picture} alt="Profile" className="profile-picture" />
-            ) : (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="user-icon"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
-                />
-              </svg>
-            )}
-          </Button>
+          <div className="profile-dropdown">
+            <Button className="profile-button" onClick={() => navigate(`/user/${user.uid}`)}>
+              {picture ? (
+                <img src={picture} alt="Profile" className="profile-picture" />
+              ) : (
+                <FontAwesomeIcon icon={faUserCircle} size="2x" />
+              )}
+            </Button>
+            <div className="dropdown-content">
+              <a onClick={() => navigate("/settings")}>Settings</a>
+              <a onClick={handleLogout}>
+                Logout <FontAwesomeIcon icon={faSignOutAlt} />
+              </a>
+            </div>
+          </div>
         ) : (
           <>
             <Button onClick={() => navigate("/register")} className="nav-button">
@@ -138,4 +133,5 @@ Header.propTypes = {
 };
 
 export default Header;
+
 

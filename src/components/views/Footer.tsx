@@ -1,7 +1,9 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLinkedin, faGithub, faInstagram } from "@fortawesome/free-brands-svg-icons";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons"; // Correct package for solid icons
 import "styles/views/Footer.scss";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -17,15 +19,16 @@ const Footer = () => {
             <li><a href="/">Home</a></li>
             <li><a href="/about">About</a></li>
             <li><a href="/contact">Contact</a></li>
+            <li><a href="/terms">Terms of Service</a></li>
+            <li><a href="/privacy">Privacy Policy</a></li>
+            <li><a href="/help">Help Center</a></li>
+            <li><a href="/faqs">FAQs</a></li>
           </ul>
         </div>
         <div className="footer-section contact">
           <h2>Contact Info</h2>
           <p>Email: info@lisungui.com</p>
           <p>Phone: +123 456 7890</p>
-        </div>
-        <div className="footer-section social">
-          <h2>Follow Us</h2>
           <div className="social-icons">
             <a href="https://linkedin.com" aria-label="LinkedIn">
               <FontAwesomeIcon icon={faLinkedin} size="2x" />
@@ -36,7 +39,23 @@ const Footer = () => {
             <a href="https://instagram.com" aria-label="Instagram">
               <FontAwesomeIcon icon={faInstagram} size="2x" />
             </a>
+            <a href="mailto:info@lisungui.com" aria-label="Email">
+              <FontAwesomeIcon icon={faEnvelope} size="2x" />
+            </a>
           </div>
+        </div>
+        <div className="footer-section newsletter">
+          <h2>Newsletter Signup</h2>
+          <p>Subscribe to our newsletter to stay updated with our latest news and offers.</p>
+          <form className="newsletter-form">
+            <input
+              type="email"
+              placeholder="Enter your email address"
+              aria-label="Email Address"
+              required
+            />
+            <button type="submit">Subscribe</button>
+          </form>
         </div>
       </div>
       <div className="footer-bottom">
@@ -47,3 +66,4 @@ const Footer = () => {
 };
 
 export default Footer;
+

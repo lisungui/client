@@ -1,0 +1,45 @@
+// FeatureUpdates.scss
+.feature-updates {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    margin-bottom: 20px;
+    color: #333;
+  
+    h2 {
+      color: #4caf50; // A green accent color
+      margin-bottom: 20px;
+    }
+  
+    .updates-list {
+      list-style-type: none;
+      padding: 0;
+  
+      .update-item {
+        margin-bottom: 15px;
+        padding: 15px;
+        border-left: 4px solid #4caf50;
+        background-color: #f1f1f1;
+        border-radius: 5px;
+  
+        .update-date {
+          font-size: 0.9rem;
+          color: #666;
+        }
+  
+        .update-title {
+          font-size: 1.2rem;
+          margin: 5px 0;
+          color: #333;
+        }
+  
+        .update-description {
+          font-size: 1rem;
+          color: #666;
+        }
+      }
+    }
+  }
+  

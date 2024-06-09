@@ -1,5 +1,3 @@
-/* Header.scss */
-
 .header {
   display: flex;
   justify-content: space-between;
@@ -52,27 +50,57 @@
     }
   }
 
-  .profile-button {
-    background: none;
-    border: none;
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
-    margin-left: 20px; // Space between the profile/login button and other buttons
-    padding: 10px;
-    flex-shrink: 0; // Prevent shrinking
+  .profile-dropdown {
+    position: relative;
+    .profile-button {
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+      margin-left: 20px; // Space between the profile/login button and other buttons
+      padding: 10px;
+      flex-shrink: 0; // Prevent shrinking
 
-    &:hover {
-      opacity: 0.8;
+      &:hover {
+        opacity: 0.8;
+      }
     }
-  }
 
-  .profile-picture {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-    flex-shrink: 0; // Prevent shrinking
+    .profile-picture {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0; // Prevent shrinking
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 50px;
+      right: 0;
+      background-color: #444;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      padding: 10px;
+      border-radius: 5px;
+      z-index: 1001;
+
+      a {
+        color: #fff;
+        text-decoration: none;
+        display: block;
+        padding: 8px 0;
+
+        &:hover {
+          background-color: #555;
+        }
+      }
+    }
+
+    &:hover .dropdown-content {
+      display: block;
+    }
   }
 
   .user-icon {
@@ -81,6 +109,7 @@
     flex-shrink: 0; // Prevent shrinking
   }
 }
+
 
 
 

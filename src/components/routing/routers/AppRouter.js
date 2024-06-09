@@ -18,6 +18,10 @@ import GameRouter from "./GameRouter";
 import Freelancer from "../../views/Freelancer";
 import ViewFreelancer from "../../views/ViewFreelance";
 import Contact from "../../views/Contact";
+import HomePage from "../../views/HomePage";
+import Dashboard from "../../views/Dashboard";
+import Faqs from "../../views/Faqs";
+import About from "../../views/About";
 
 const AppRouter = () => {
   return (
@@ -25,11 +29,41 @@ const AppRouter = () => {
       <BrowserRouter>
         <Header height="100" />
         <Routes>
-          <Route path="/" element={<SignIn />} />
+          <Route path="/" element={<HomePage />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/contact" element={<Contact />} />
+
+          <Route
+            path="/"
+            element={
+              <HomePage />
+            }
+          />
+
+          <Route
+            path="/faqs"
+            element={
+              <Faqs />
+            }
+          />
+
+          <Route
+            path="/about"
+            element={
+              <About />
+            }
+          />
+
+          <Route
+            path="/dashboard"
+            element={
+              <RequiredAuth>
+                <Dashboard />
+              </RequiredAuth>
+            }
+          />
 
           <Route
             path="/home"
