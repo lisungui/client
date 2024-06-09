@@ -27,7 +27,11 @@ const Header: React.FC<{ height?: string }> = (props) => {
   }, []);
 
   const navigateToHome = () => {
-    navigate("/home");
+    if (user) {
+      navigate("/home");
+    } else {
+      navigate("/");
+    }
   };
 
   const navigateToCreateFreelance = async () => {
@@ -72,15 +76,13 @@ const Header: React.FC<{ height?: string }> = (props) => {
         <h1 className="title">Lisungui</h1> {/* Title is not a clickable link */}
       </div>
       <div className="middle-section">
+        <Button onClick={navigateToHome} className="nav-button">
+          Home
+        </Button>
         {user && (
-          <>
-            <Button onClick={navigateToHome} className="nav-button">
-              Home
-            </Button>
-            <Button onClick={navigateToCreateFreelance} className="nav-button">
-              Join as a Freelancer
-            </Button>
-          </>
+          <Button onClick={navigateToCreateFreelance} className="nav-button">
+            Join as a Freelancer
+          </Button>
         )}
         <Button onClick={() => navigate("/about")} className="nav-button">
           About
@@ -136,3 +138,4 @@ Header.propTypes = {
 };
 
 export default Header;
+
