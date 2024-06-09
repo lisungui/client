@@ -1,26 +1,21 @@
 import React, { useState } from "react";
-import { api, handleError } from "helpers/api";
-import User from "models/User";
-import { useNavigate } from "react-router-dom";
-import { Button } from "components/ui/Button";
-import "styles/views/Login.scss";
+import { auth, googleProvider, githubProvider } from "../../firebaseConfig";
+import { signInWithPopup, signInWithEmailAndPassword } from "firebase/auth";
 import BaseContainer from "components/ui/BaseContainer";
+import { Button } from "components/ui/Button";
 import PropTypes from "prop-types";
-
-/*
-It is possible to add multiple components inside a single file,
-however be sure not to clutter your files with an endless amount!
-As a rule of thumb, use one file per component and only add small,
-specific components that belong to the main one in the same file.
- */
+import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGoogle, faGithub } from "@fortawesome/free-brands-svg-icons"; // Import the icons
+import "styles/views/SignIn.scss"; // Import the updated SCSS file
 
 const FormField = (props) => {
   return (
-    <div className="login field">
-      <label className="login label">{props.label}</label>
+    <div className="register field">
+      <label className="register label">{props.label}</label>
       <input
         type={props?.type || "text"}
-        className="login input"
+        className="register input"
         placeholder="enter here.."
         value={props.value}
         onChange={(e) => props.onChange(e.target.value)}
@@ -37,81 +32,93 @@ FormField.propTypes = {
 };
 
 const Login = () => {
-  // const navigate = useNavigate();
-  // const [password, setPassword] = useState<string>(null);
-  // const [email, setEmail] = useState<string>(null);
+  const [email, setEmail] = useState<string>(null);
+  const [password, setPassword] = useState<string>(null);
+  const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
-  // const doLogin = async () => {
-  //   try {
-  //     const requestBody = JSON.stringify({ email, password });
-  //     const response = await api.post("/users/login", requestBody);
+  const signInWithGoogle = async () => {
+    try {
+      await signInWithPopup(auth, googleProvider);
+      navigate("/home");
+    } catch (error) {
+      console.error("Error signing in with Google", error);
+    }
+  };
 
-  //     // Get the returned user and update a new object.
-  //     const user = new User(response.data);
-  //     console.log("Response data: ", response.data);
-  //     // Store the userToken into the local storage.
-  //     localStorage.setItem("userToken", user.userToken);
-  //     localStorage.setItem("username", user.username);
-  //     localStorage.setItem("id", user.id);
+  const signInWithGithub = async () => {
+    try {
+      await signInWithPopup(auth, githubProvider);
+      navigate("/home");
+    } catch (error) {
+      console.error("Error signing in with GitHub", error);
+      setError(error.message);
+    }
+  };
 
-  //     // Login successfully worked --> navigate to the route /game in the GameRouter
-  //     navigate("/home");
-  //   } catch (error) {
-  //     console.error(
-  //       `Something went wrong while login: \n${handleError(error)}`
-  //     );
-  //     console.error("Details:", error);
-  //     const errorMessage =
-  //       error.response?.data?.message ||
-  //       error.response?.data ||
-  //       error.message ||
-  //       "An unknown error occurred";
-  //     alert(
-  //       `${errorMessage}`
-  //     );
-  //   }
-  // };
+  const signInWithEmail = async () => {
+    if (email && password) {
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        navigate("/home");
+      } catch (error) {
+        console.error("Error signing in with Email and Password", error);
+        setError(error.message);
+      }
+    }
+  };
 
-  // return (
-  //   <BaseContainer>
-  //     <div className="login container">
-  //       <h2>Login</h2>
-  //       <div className="login form">
-  //         <FormField
-  //           label="Email"
-  //           value={email}
-  //           onChange={(un: string) => setEmail(un)}
-  //         />
-  //         <FormField
-  //           label="Password"
-  //           value={password}
-  //           onChange={(n) => setPassword(n)}
-  //           type="password"
-  //         />
-  //         <div className="login button-container">
-  //           <Button
-  //             disabled={!email || !password}
-  //             width="50%"
-  //             onClick={() => doLogin()}
-  //           >
-  //             Login
-  //           </Button>
-  //         </div>
-  //         <div className="register button-container">
-  //           <p className="register prompt">
-  //             Do not have an account yet? <a href="/register" onClick={(e) => {
-  //               e.preventDefault();
-  //               navigate("/register");
-  //             }}>Sign up</a>
-  //           </p>
-  //         </div>
-  //       </div>
-  //     </div>
-  //   </BaseContainer>
-  // );
+  return (
+    <BaseContainer>
+      <div className="register container">
+        <h2>Sign In</h2>
+        <h4>to your Lisungui account</h4>
+        <div className="register form">
+          <FormField label="Email" value={email} onChange={setEmail} />
+          <FormField
+            label="Password"
+            type="password"
+            value={password}
+            onChange={setPassword}
+          />
+          <div className="register button-container">
+            <Button
+              disabled={!email || !password}
+              width="50%"
+              onClick={signInWithEmail}
+            >
+              Sign In
+            </Button>
+          </div>
+          <div className="register button-container">
+            <p className="register prompt">
+            Don&apos;t have an account yet?{" "}
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigate("/register");
+                }}
+              >
+                Sign Up
+              </a>
+            </p>
+          </div>
+        </div>
+        <p className="or-container">OR</p> {/* Use the new class for styling */}
+        <div className="social-buttons">
+          <Button onClick={signInWithGoogle}>
+            <FontAwesomeIcon icon={faGoogle} style={{ marginRight: "10px" }} />
+            Sign In with Google
+          </Button>
+          <Button onClick={signInWithGithub}>
+            <FontAwesomeIcon icon={faGithub} style={{ marginRight: "10px" }} />
+            Sign In with GitHub
+          </Button>
+        </div>
+      </div>
+    </BaseContainer>
+  );
 };
 
-/**
- * You can get access to the history object's properties via the useLocation, useNavigate, useParams, ... hooks.
- */
 export default Login;

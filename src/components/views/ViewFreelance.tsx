@@ -23,7 +23,6 @@ const ViewFreelance = () => {
       }
     });
 
-    // Clean up the subscription on unmount
     return () => unsubscribe();
   }, []);
 
@@ -38,10 +37,10 @@ const ViewFreelance = () => {
       );
       console.error("Details:", error);
       const errorMessage =
-      error.response?.data?.message ||
-          error.response?.data ||
-          error.message ||
-          "An unknown error occurred";
+        error.response?.data?.message ||
+        error.response?.data ||
+        error.message ||
+        "An unknown error occurred";
       alert(`${errorMessage}`);
     } finally {
       setLoading(false);

@@ -1,17 +1,49 @@
-.view.container {
-    margin: 20px;
-  }
-  
-  .view.field {
-    margin-bottom: 10px;
-  }
-  
-  .view.label {
-    font-weight: bold;
-    margin-right: 10px;
-  }
-  
-  .view.button-container {
-    margin-top: 20px;
-  }
-  
+/* Freelance.scss */
+
+@import "../theme"; // Ensure you import any necessary global styles or mixins
+
+/* Ensure the container does not touch the header */
+.join.container {
+  margin-top: 100px; // Add sufficient margin to ensure it doesn't touch the header
+  padding: 20px;
+  color: black; // Ensure all text within the container is black
+}
+
+/* Style the form fields */
+.join.field {
+  margin-bottom: 10px;
+}
+
+.join.label {
+  font-weight: bold;
+  margin-right: 10px;
+  color: black; // Ensure all labels are black
+}
+
+.join.button-container {
+  margin-top: 20px;
+}
+
+/* Ensure all text elements within the .join.container are black */
+.join.container h1,
+.join.container h2,
+.join.container h3,
+.join.container h4,
+.join.container h5,
+.join.container h6,
+.join.container p,
+.join.container span,
+.join.container label,
+.join.container div {
+  color: black;
+}
+
+/* Style checkboxes and their labels */
+.join.field input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.join.field label {
+  margin-right: 15px; // Space between checkboxes and labels
+}
+

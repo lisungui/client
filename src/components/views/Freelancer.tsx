@@ -3,7 +3,7 @@ import Freelance from "models/Freelance";
 import { useNavigate } from "react-router-dom";
 import { Button } from "components/ui/Button";
 import { api, handleError } from "helpers/api";
-import "styles/views/Lobby.scss";
+import "styles/views/Freelance.scss";
 import BaseContainer from "components/ui/BaseContainer";
 import { onAuthStateChanged, User } from "firebase/auth";
 import { auth } from "../../firebaseConfig";
@@ -34,7 +34,6 @@ const FreelanceCreate = () => {
       }
     });
 
-    // Clean up the subscription on unmount
     return () => unsubscribe();
   }, []);
 
@@ -73,7 +72,7 @@ const FreelanceCreate = () => {
 
       const freelance = new Freelance(response.data);
       console.log("Created freelance profile:", freelance);
-      console.log("Freelance ID:", freelance.id)
+      console.log("Freelance ID:", freelance.id);
 
       navigate(`/freelancers/${freelance.id}`);
     } catch (error) {

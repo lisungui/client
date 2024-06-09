@@ -93,12 +93,6 @@ const Home = () => {
 
   return (
     <BaseContainer className="home container">
-      <Button
-        className="homeButton createButton"
-        onClick={navigateToCreateFreelance}
-      >
-        Freelance
-      </Button>
       <Button className="homeButton joinButton" onClick={navigateToJoinLobby}>
         Join Lobby
       </Button>

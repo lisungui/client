@@ -1,147 +1,104 @@
 import React, { useEffect, useState } from "react";
-import { api, handleError } from "helpers/api";
+import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
-import { useLocation, useNavigate } from "react-router-dom";
-import "../../styles/views/Header.scss";
+import "../../styles/views/Header.scss"; // Import the SCSS file
 import { auth } from "../../firebaseConfig";
-import { onAuthStateChanged, User } from "firebase/auth";
+import { onAuthStateChanged, User, signOut } from "firebase/auth";
+import { Button } from "components/ui/Button";
+import { api, handleError } from "helpers/api";
 
 const Header: React.FC<{ height?: string }> = (props) => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const [picture, setPicture] = useState<string | null>(null);
   const [user, setUser] = useState<User | null>(null);
+  const [picture, setPicture] = useState<string | null>(null);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
+        fetchUserProfilePicture(user.uid); // Fetch user profile picture
       } else {
         setUser(null);
+        setPicture(null);
       }
     });
 
-    // Clean up the subscription on unmount
     return () => unsubscribe();
   }, []);
 
-  const navigateToUser = () => {
-    navigate(`/user/${user?.uid}`);
+  const navigateToHome = () => {
+    navigate("/home");
   };
 
-  // Determine if back button should be shown
-  const shouldShowBackButton = ["/lobby/join", "/lobby/create", "/user/"].some(
-    (path) => {
-      if (path === location.pathname) {
-        return true;
-      }
-
-      if (path === "/user/") {
-        return (
-          location.pathname.startsWith("/user/") &&
-          location.pathname.split("/").length === 3
-        );
-      }
-
-      return false;
+  const navigateToCreateFreelance = async () => {
+    try {
+      const response = await api.post("/createfreelance", { uid: user.uid });
+      navigate("/freelancers");
+    } catch (error) {
+      console.error(
+        `Something went wrong while fetching the user data: \n${handleError(error)}`
+      );
+      console.error("Details:", error);
+      const errorMessage =
+        error.response?.data?.message ||
+        error.response?.data ||
+        error.message ||
+        "An unknown error occurred";
+      alert(`${errorMessage}`);
     }
-  );
+  };
 
-  // Determine if profile button should be shown
-  const shouldShowProfileButton = !(
-    location.pathname.includes("game") ||
-    location.pathname.includes("host") ||
-    location.pathname.includes("joined") ||
-    location.pathname === "/login" ||
-    location.pathname === "/register" ||
-    location.pathname === "/"
-  );
-
-  useEffect(() => {
-    if (!shouldShowProfileButton) {
-      // This condition prevents the API call on login/register pages.
-      return;
+  const fetchUserProfilePicture = async (uid: string) => {
+    try {
+      const response = await api.get(`/users/${uid}`);
+      setPicture(response.data.photoUrl);
+    } catch (error) {
+      console.error("Failed to fetch user profile picture:", error);
     }
-    async function fetchData() {
-      try {
-        const response = await api.get(`/users/${user?.uid}`);
-        setPicture(response.data.photoUrl);
-      } catch (error) {
-        console.error(
-          `Something went wrong while fetching the user picture: \n${handleError(
-            error
-          )}`
-        );
-        console.error("Details:", error);
-        const errorMessage =
-          error.response?.data?.message ||
-          error.response?.data ||
-          error.message ||
-          "An unknown error occurred";
-        alert(`${errorMessage}`);
-      }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      navigate("/login"); // Redirect to login page after logout
+    } catch (error) {
+      console.error("Error logging out:", error);
     }
-
-    fetchData();
-  }, [user?.uid, shouldShowProfileButton]);
-
-  const formatBase64Image = (base64: string) => {
-    if (!base64.startsWith("data:image/")) {
-      return `data:image/jpeg;base64,${base64}`;
-    }
-
-    return base64;
   };
 
   return (
-    <div className="header container" style={{ height: props.height }}>
-      <div className="back-button-container">
-        {shouldShowBackButton && (
-          <button
-            className="header-button back-button"
-            onClick={() => navigate(-1)}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="w-6 h-6 back-arrow"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15.75 19.5L8.25 12l7.5-7.5"
-              />
-            </svg>
-            Back
-          </button>
+    <div className="header" style={{ height: props.height }}>
+      <div className="left-section">
+        <h1 className="title">Lisungui</h1> {/* Title is not a clickable link */}
+      </div>
+      <div className="middle-section">
+        {user && (
+          <>
+            <Button onClick={navigateToHome} className="nav-button">
+              Home
+            </Button>
+            <Button onClick={navigateToCreateFreelance} className="nav-button">
+              Join as a Freelancer
+            </Button>
+          </>
+        )}
+        <Button onClick={() => navigate("/about")} className="nav-button">
+          About
+        </Button>
+        <Button onClick={() => navigate("/contact")} className="nav-button">
+          Contact Us
+        </Button>
+        {user && (
+          <Button onClick={handleLogout} className="nav-button">
+            Logout
+          </Button>
         )}
       </div>
-      <h1 className="header title">Lisungui</h1>
-      <div className="profile-button-container">
-        {shouldShowProfileButton && (
-          <button
-            className="header-button profile-button"
-            onClick={() => navigateToUser()}
-          >
+      <div className="right-section">
+        {user ? (
+          <Button className="profile-button" onClick={() => navigate(`/user/${user.uid}`)}>
             {picture ? (
-              <div
-                className="picture"
-                style={{ marginTop: "10px", textAlign: "center" }}
-              >
-                <img
-                  // src={formatBase64Image(picture)}
-                  src={picture}
-                  style={{
-                    borderRadius: "50%",
-                    width: "90px",
-                    height: "90px",
-                    align: "auto",
-                  }}
-                />
-              </div>
+              <img src={picture} alt="Profile" className="profile-picture" />
             ) : (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -149,7 +106,7 @@ const Header: React.FC<{ height?: string }> = (props) => {
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
                 stroke="currentColor"
-                className="w-6 h-6 user-icon"
+                className="user-icon"
               >
                 <path
                   strokeLinecap="round"
@@ -158,7 +115,16 @@ const Header: React.FC<{ height?: string }> = (props) => {
                 />
               </svg>
             )}
-          </button>
+          </Button>
+        ) : (
+          <>
+            <Button onClick={() => navigate("/register")} className="nav-button">
+              Register
+            </Button>
+            <Button onClick={() => navigate("/login")} className="nav-button">
+              Login
+            </Button>
+          </>
         )}
       </div>
     </div>
@@ -170,4 +136,3 @@ Header.propTypes = {
 };
 
 export default Header;
-

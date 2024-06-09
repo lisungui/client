@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "../../views/AuthState";
-import RequiredAuth from "../../views/RequiredAuth"; // Adjust the path as necessary
+import RequiredAuth from "../../views/RequiredAuth";
 import Login from "../../views/Login";
 import Register from "../../views/Register";
 import Home from "../../views/Home";

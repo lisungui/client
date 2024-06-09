@@ -2,11 +2,11 @@
 
 .home {
   &.container {
-    margin-top: 2em;
+    margin-top: 80px; // Add sufficient margin to ensure the container doesn't touch the header
     min-height: 200px;
-    /* we include the center mixin defined in _theme.scss and save three duplicate lines :) */
     @include center;
     flex-direction: column;
+    color: black; // Ensure all text is black
   }
 }
 
@@ -34,6 +34,41 @@
   margin-right: 0.5rem; /* Adjust as needed for spacing */
   cursor: pointer;
 }
+
+.tooltip-container p {
+  margin: 0;
+}
+
+.rulesButton {
+  margin-top: 2em;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(152, 155, 12);
+}
+
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.info {
+  animation: slideInFromLeft 1s ease-out;
+  color: black; // Ensure the animated text is black
+}
+
+/* Additional text styling to ensure all written text is black */
+p, h1, h2, h3, h4, h5, h6, ul, li {
+  color: black; // Ensure all standard text elements are black
+}
+
 
 .tooltip-container p {
   margin: 0;
