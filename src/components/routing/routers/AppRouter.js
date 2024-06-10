@@ -20,6 +20,8 @@ import UpdateUser from "../../views/UpdateUser";
 import UserProfile from "../../views/UserProfile";
 import UserDetails from "../../views/User";
 import HelpCenter from "../../views/HelpCenter";
+import TermsOfService from "../../views/TermsOfService";
+import PrivacyPolicy from "../../views/PrivacyPolicy";
 
 const AppRouter = () => {
   return (
@@ -92,6 +94,20 @@ const AppRouter = () => {
             path="/faqs"
             element={
               <Faqs />
+            }
+          />
+
+          <Route
+            path="/terms"
+            element={
+              <TermsOfService />
+            }
+          />
+
+          <Route
+            path="/privacy"
+            element={
+              <PrivacyPolicy />
             }
           />
 
