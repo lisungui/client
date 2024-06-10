@@ -62,10 +62,23 @@ const Register = () => {
     if (email && password) {
       try {
         await createUserWithEmailAndPassword(auth, email, password);
+        console.log("Signed up with Email and Password");
         navigate("/home");
       } catch (error) {
-        console.error("Error signing up with Email and Password", error);
-        setError(error.message);
+        console.error("Error signing up with Email and Password...", error);
+        if (error.code === "auth/invalid-email") {
+          setError("The email address is badly formatted.");
+          alert("Invalid email address. Please try a valid one.");
+        } else if (error.code === "auth/weak-password") {
+          setError("The password is too weak.");
+          alert("The password is too weak. Please try a stronger one.");
+        } else if (error.code === "auth/email-already-in-use") {
+          setError("The email address is already in use by another account.");
+          alert("The email address is already in use by another account.");
+        }
+        else {
+          setError(error.message);
+        }
       }
     }
   };

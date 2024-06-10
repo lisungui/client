@@ -32,18 +32,6 @@ const Header: React.FC<{ height?: string }> = (props) => {
     navigate(user ? "/home" : "/");
   };
 
-  const navigateToCreateFreelance = async () => {
-    try {
-      await api.post("/createfreelance", { uid: user?.uid });
-      navigate("/freelancers");
-    } catch (error) {
-      console.error(
-        `Something went wrong while fetching the user data: \n${handleError(error)}`
-      );
-      alert("An error occurred while creating a freelancer profile.");
-    }
-  };
-
   const fetchUserProfilePicture = async (uid: string) => {
     try {
       const response = await api.get(`/users/${uid}`);
@@ -81,9 +69,6 @@ const Header: React.FC<{ height?: string }> = (props) => {
             </Button>
             <Button onClick={() => navigate("/messages")} className="nav-button">
               Messages
-            </Button>
-            <Button onClick={navigateToCreateFreelance} className="nav-button">
-              Join as a Freelancer
             </Button>
           </>
         )}

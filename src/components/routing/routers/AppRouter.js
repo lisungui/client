@@ -22,6 +22,8 @@ import UserDetails from "../../views/User";
 import HelpCenter from "../../views/HelpCenter";
 import TermsOfService from "../../views/TermsOfService";
 import PrivacyPolicy from "../../views/PrivacyPolicy";
+import CreateGig from "../../views/CreateGig";
+import ViewGigs from "../../views/ViewGigs";
 
 const AppRouter = () => {
   return (
@@ -53,6 +55,22 @@ const AppRouter = () => {
               <RequiredAuth>
                 <Messages />
               </RequiredAuth>
+            }
+          />
+
+          <Route
+            path="/user/:id/create-gig"
+            element={
+              <RequiredAuth>
+                <CreateGig />
+              </RequiredAuth>
+            }
+          />
+
+          <Route
+            path="my-gigs"
+            element={
+              <ViewGigs />
             }
           />
 

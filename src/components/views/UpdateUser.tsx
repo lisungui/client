@@ -6,6 +6,7 @@ import FormField from "./FormField";
 
 const UpdateUser: React.FC = () => {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
     phone: "",
@@ -69,9 +70,9 @@ const UpdateUser: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await api.put(`/users/update/${id}`, formData);
-      console.log("Updated User Info:", response.data);
+      const response = await api.put(`/users/${id}`, formData);
       // Redirect or show success message
+      navigate(`/profile/${id}`)
     } catch (error) {
       console.error("Error updating user information:", handleError(error));
     }

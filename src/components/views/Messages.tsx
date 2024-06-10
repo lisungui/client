@@ -7,6 +7,10 @@ interface User {
   username: string | null;
   email: string;
   picture: string;
+  phone?: string;         // Optional fields for detailed info
+  languages?: string[];
+  country?: string;
+  interest?: string;
 }
 
 interface Message {
@@ -75,9 +79,14 @@ const Messages: React.FC = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const handleProfileClick = (user: User) => {
-    setPopupUser(user);
-    setShowProfilePopup(true);
+  const handleProfileClick = async (user: User) => {
+    try {
+      const response = await api.get(`/users/${user.id}`);
+      setPopupUser(response.data);
+      setShowProfilePopup(true);
+    } catch (error) {
+      console.error("Failed to fetch user details:", error);
+    }
   };
 
   const closeProfilePopup = () => {
@@ -151,6 +160,10 @@ const Messages: React.FC = () => {
             <img src={popupUser.picture} alt={popupUser.username || popupUser.email} className="popup-picture" />
             <h2>{popupUser.username || popupUser.email}</h2>
             <p><strong>Email:</strong> {popupUser.email}</p>
+            <p><strong>Phone:</strong> {popupUser.phone || "N/A"}</p>
+            <p><strong>Languages:</strong> {popupUser.languages?.join(", ") || "N/A"}</p>
+            <p><strong>Country:</strong> {popupUser.country || "N/A"}</p>
+            <p><strong>Interest:</strong> {popupUser.interest || "N/A"}</p>
             <button onClick={closeProfilePopup} className="close-button">OK</button>
           </div>
         </div>
