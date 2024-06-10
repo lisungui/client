@@ -1,30 +1,64 @@
+// WelcomeSection.scss
+
 .welcome-section {
-    text-align: center;
-    margin: 40px 0;
-  
-    h1 {
-      font-size: 2rem;
-      color: #333;
-    }
-  
-    .quick-access-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 20px;
-  
-      button {
-        background-color: #4caf50;
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); // Gradient background
+  padding: 40px;
+  border-radius: 15px; // Rounded corners
+  color: #fff; // White text color
+  text-align: center;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); // Subtle shadow for depth
+  margin-top: 20px;
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #fff; // Ensure the header text is white
+  }
+
+  .quick-access-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px; // Space between buttons
+
+    button {
+      background: #fff; // White background for buttons
+      color: #2575fc; // Text color matching the gradient
+      border: none;
+      border-radius: 10px; // Rounded corners for buttons
+      padding: 15px 25px; // Increased padding for larger buttons
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s, transform 0.3s; // Smooth transitions for hover effects
+
+      &:hover {
+        background: #2575fc;
         color: #fff;
-        border: none;
-        padding: 10px 20px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-  
-        &:hover {
-          background-color: #45a049;
-        }
+        transform: translateY(-3px); // Slight lift effect on hover
+      }
+
+      &:focus {
+        outline: none; // Remove default outline
+        box-shadow: 0 0 0 3px rgba(37, 117, 252, 0.5); // Custom focus ring
       }
     }
   }
+}
+
+// Responsive design for smaller screens
+@media (max-width: 768px) {
+  .welcome-section {
+    padding: 20px;
+    h1 {
+      font-size: 2rem;
+    }
+    .quick-access-buttons {
+      flex-direction: column;
+      gap: 10px;
+      button {
+        width: 100%; // Full width buttons on small screens
+      }
+    }
+  }
+}
+
   
