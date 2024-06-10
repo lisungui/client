@@ -47,7 +47,7 @@ const Header: React.FC<{ height?: string }> = (props) => {
   const fetchUserProfilePicture = async (uid: string) => {
     try {
       const response = await api.get(`/users/${uid}`);
-      setPicture(response.data.photoUrl);
+      setPicture(response.data.picture);
     } catch (error) {
       console.error("Failed to fetch user profile picture:", error);
     }
