@@ -10,6 +10,7 @@ import DashboardOverview from "./DashboardOverview";
 import RecommendedGigs from "./RecommendedGigs";
 import FeedbackSupport from "./FeedbackSupport";
 import FeatureUpdates from "./FeatureUpdates";
+import Links from "./Links";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -34,6 +35,7 @@ const Home = () => {
       <DashboardOverview />
       <RecommendedGigs />
       <FeatureUpdates />
+      <Links />
       <FeedbackSupport />
       <div className="quick-access">
         <h3>Quick Access</h3>
