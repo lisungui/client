@@ -48,7 +48,7 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    overflow-y: auto; // Make chat-box scrollable if needed
+    overflow: hidden; // Prevents the chat-box itself from scrolling
 
     .chat-header {
       display: flex;
@@ -74,7 +74,7 @@
 
     .messages-list {
       flex: 1;
-      overflow-y: auto;
+      overflow-y: auto; // Enable vertical scrolling within the messages list
       padding: 20px;
       display: flex;
       flex-direction: column;
@@ -83,10 +83,13 @@
         margin-bottom: 15px;
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
 
         &.sent {
           align-items: flex-end;
+        }
+
+        &.received {
+          align-items: flex-start;
         }
 
         .message-content {
@@ -103,16 +106,17 @@
           color: #333;
         }
 
-        .message-meta {
-          display: flex;
-          justify-content: space-between;
-          width: 100%;
+        .timestamp {
           font-size: 0.8rem;
           color: #999;
           margin-top: 5px;
 
-          .sender {
-            font-weight: bold;
+          &.sent {
+            align-self: flex-end; // Keep the timestamp on the right for sent messages
+          }
+
+          &.received {
+            align-self: flex-start; // Move the timestamp to the left for received messages
           }
         }
       }
@@ -228,7 +232,6 @@
     }
   }
 }
-
 
 
 
