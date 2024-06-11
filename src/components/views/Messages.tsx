@@ -1,13 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
 import { api, handleError } from "helpers/api";
 import "../../styles/views/Messages.scss";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../firebaseConfig";
+
 
 interface User {
   id: number;
   username: string | null;
   email: string;
-  picture: string;
-  phone?: string;         // Optional fields for detailed info
+  picture: string | null;
+  phone?: string;
   languages?: string[];
   country?: string;
   interest?: string;
@@ -28,6 +31,21 @@ const Messages: React.FC = () => {
   const [showProfilePopup, setShowProfilePopup] = useState(false);
   const [popupUser, setPopupUser] = useState<User | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const [uid, setUid] = useState<string | null>(null);
+
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUid(user.uid);
+      } else {
+        setUid(null);
+      }
+    });
+
+    // Clean up the subscription on unmount
+    return () => unsubscribe();
+  }, []);
 
   useEffect(() => {
     fetchUsers();
@@ -53,17 +71,15 @@ const Messages: React.FC = () => {
     }
   };
 
-  const fetchMessages = async (userId: number) => {
-    const fetchedMessages: Message[] = [
-      { id: 1, sender: "Alice", content: "Hello!", timestamp: "10:00 AM" },
-      { id: 2, sender: "You", content: "Hi Alice, how are you?", timestamp: "10:01 AM" },
-      { id: 3, sender: "Alice", content: "I'm good, thanks! How about you?", timestamp: "10:02 AM" },
-    ];
+  const fetchMessages = async (userId) => {
+    // Fetch messages for the selected user
+    const response = await api.get(`/messages/${userId}`);
+    const fetchedMessages: Message[] = response.data;
     setMessages(fetchedMessages);
   };
 
-  const handleSendMessage = () => {
-    if (inputMessage.trim()) {
+  const handleSendMessage = async () => {
+    if (inputMessage.trim() && selectedUser) {
       const newMessage: Message = {
         id: messages.length + 1,
         sender: "You",
@@ -72,6 +88,25 @@ const Messages: React.FC = () => {
       };
       setMessages([...messages, newMessage]);
       setInputMessage("");
+
+      try {
+        const payload = {
+          senderId: uid, 
+          recipientId: selectedUser?.id,
+          content: newMessage.content,
+          id: newMessage.id,
+          timestamp: newMessage.timestamp,
+        };
+        console.log("Sending payload:", payload);
+        const response = await api.post("/sendmessage", payload);
+  
+        // Optionally handle success response (e.g., update message status)
+      } catch (error) {
+        // Handle the error (e.g., show an error message, revert optimistic update)
+        console.error("Failed to send message:", error);
+        // Revert the optimistic update by removing the last message
+        setMessages((prevMessages) => prevMessages.filter((msg) => msg.id !== newMessage.id));
+      }
     }
   };
 
@@ -103,7 +138,11 @@ const Messages: React.FC = () => {
             className={`user-item ${selectedUser?.id === user.id ? "selected" : ""}`}
             onClick={() => setSelectedUser(user)}
           >
-            <img src={user.picture} alt={user.username || user.email} className="user-picture" />
+            <img
+              src={user.picture || "https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg"} // Use default if picture is null
+              alt={user.username || user.email}
+              className="user-picture"
+            />
             <span className="user-name">{user.username || user.email}</span>
           </div>
         ))}
@@ -113,10 +152,10 @@ const Messages: React.FC = () => {
           <>
             <div className="chat-header">
               <img
-                src={selectedUser.picture}
+                src={selectedUser.picture || "https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg"} // Use default if picture is null
                 alt={selectedUser.username || selectedUser.email}
                 className="chat-header-picture"
-                onClick={() => handleProfileClick(selectedUser)} // Show popup on click
+                onClick={() => handleProfileClick(selectedUser)}
               />
               <span className="chat-header-name">{selectedUser.username || selectedUser.email}</span>
             </div>
@@ -157,7 +196,11 @@ const Messages: React.FC = () => {
       {showProfilePopup && popupUser && (
         <div className="profile-popup">
           <div className="popup-content">
-            <img src={popupUser.picture} alt={popupUser.username || popupUser.email} className="popup-picture" />
+            <img
+              src={popupUser.picture || "https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg"} // Use default if picture is null
+              alt={popupUser.username || popupUser.email}
+              className="popup-picture"
+            />
             <h2>{popupUser.username || popupUser.email}</h2>
             <p><strong>Email:</strong> {popupUser.email}</p>
             <p><strong>Phone:</strong> {popupUser.phone || "N/A"}</p>

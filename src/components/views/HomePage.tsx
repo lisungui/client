@@ -4,6 +4,7 @@ import FeaturesSection from "./FeaturesSection";
 import HowItWorks from "./HowItWorks";
 import CallToAction from "./CallToAction";
 import FeatureUpdates from "./FeatureUpdates";
+import OurServices from "./OurServices";
 
 const HomePage: React.FC = () => {
   return (

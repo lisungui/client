@@ -1,9 +1,7 @@
-// Home.scss
-
 .home-container {
   padding: 40px 20px;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 80px auto 0; // Add top margin to create space from the "Our Services" section
   background-color: #f5f5f5; // Light background for the main container
   color: #333; // Ensure text is black or dark for good readability
 

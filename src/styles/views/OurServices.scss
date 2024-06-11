@@ -1,0 +1,105 @@
+// src/styles/views/OurServices.scss
+
+.our-services {
+    position: fixed; // Fix the position on the screen
+    top: 70px; // Adjust according to the height of the header to avoid overlap
+    left: 0;
+    right: 0;
+    z-index: 999; // Ensure it stays above other content
+    background-color: #f8f9fa; // Light background color
+    padding: 20px 0; // Adjust padding to fit the fixed layout
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      overflow-x: auto; // Enable horizontal scrolling
+      white-space: nowrap; // Prevent wrapping
+      scrollbar-width: thin; // Thin scrollbar for Firefox
+      scrollbar-color: #28a745 #f8f9fa; // Scrollbar color for Firefox
+  
+      &::-webkit-scrollbar {
+        height: 8px; // Scrollbar height for Webkit browsers
+      }
+  
+      &::-webkit-scrollbar-track {
+        background: #f8f9fa; // Scrollbar track color
+      }
+  
+      &::-webkit-scrollbar-thumb {
+        background: #28a745; // Scrollbar thumb color
+        border-radius: 10px; // Rounded corners for scrollbar thumb
+      }
+  
+      li {
+        display: inline-block; // Ensure each item stays on one line
+        padding: 10px 20px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 1.2rem;
+        color: #28a745; // Green text color
+        font-weight: bold;
+        position: relative; // For the separator
+  
+        // Separator line between items
+        &::after {
+          content: "";
+          position: absolute;
+          right: -10px;
+          top: 50%;
+          transform: translateY(-50%);
+          height: 60%;
+          width: 2px;
+          background-color: #28a745;
+        }
+  
+        &:hover {
+          background-color: #28a745; // Green background on hover
+          color: #fff; // White text on hover
+        }
+  
+        // Remove the separator after the last item
+        &:last-child::after {
+          display: none;
+        }
+      }
+  
+      .service-link {
+        text-decoration: none; // Remove underline from links
+        color: inherit; // Inherit color for hover effect
+      }
+    }
+  
+    // Responsive design for small screens
+    @media (max-width: 768px) {
+      ul {
+        overflow-x: auto; // Enable horizontal scrolling
+        padding: 0 10px; // Add some padding for scrolling
+  
+        li {
+          padding: 10px 10px; // Adjust padding for small screens
+          margin-right: 10px; // Space between items
+  
+          // Hide the separator on small screens
+          &::after {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  

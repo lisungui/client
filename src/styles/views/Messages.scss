@@ -2,12 +2,11 @@
   display: flex;
   height: calc(100vh - 70px); // Adjust height to account for the header (assumed header height is 70px)
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 150px auto 0; // Increase top margin to create more space below the "Our Services" section
   border: 1px solid #ddd;
   border-radius: 8px;
   background-color: #f9f9f9;
   overflow: hidden;
-  margin-top: 80px; // Add space to push it below the header
 
   .user-list {
     width: 30%;
@@ -229,6 +228,9 @@
     }
   }
 }
+
+
+
 
   
   

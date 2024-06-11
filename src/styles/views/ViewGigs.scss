@@ -1,8 +1,8 @@
-// ViewGigs.scss
+// src/styles/views/ViewGigs.scss
 
 .view-gigs-container {
     padding: 20px;
-    margin-top: 80px; // Adjust for header space
+    margin-top: 100px; // Add top margin to create space from the "Our Services" section
     background-color: #f9f9f9; // Light background color
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); // Soft shadow for depth
@@ -55,5 +55,4 @@
         max-width: 100%;
       }
     }
-  }
-  
+}

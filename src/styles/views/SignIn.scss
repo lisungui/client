@@ -1,6 +1,8 @@
+// src/styles/views/Register.scss
+
 @import "../theme"; // Optional: Replace with the actual path if you have a theme file
 
-// Styling for the main sign-in container
+// Styling for the main register container
 .register.container {
   display: flex;
   flex-direction: column;
@@ -14,7 +16,7 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); // Subtle shadow for depth
   max-width: 400px; // Reduced max-width for a smaller container
   width: 80%; // Use a percentage width for responsiveness
-  margin: 80px auto 0; // Increase the top margin to create more space from the header
+  margin: 150px auto 0; // Increased top margin to create more space from the header and other sections
 
   h2 {
     color: #000; // Black heading color
@@ -175,4 +177,5 @@
     }
   }
 }
+
 

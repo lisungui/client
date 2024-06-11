@@ -1,7 +1,9 @@
-// Dashboard.scss
+// src/styles/views/Dashboard.scss
+
 .dashboard {
     padding: 20px;
     max-width: 1200px;
-    margin: 0 auto;
-  }
+    margin: 80px auto 0; // Add top margin to create space from the "Our Services" section
+}
+
   

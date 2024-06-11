@@ -17,11 +17,11 @@ html, body {
     justify-content: center; /* Vertically center content */
 }
 
-/* Add margin-top to the contact container to ensure spacing from the header */
+/* Add margin-top to the contact container to ensure spacing from the header and OurServices */
 .contact-container {
     width: 90%; /* Use relative width */
     max-width: 600px; /* Set a maximum width */
-    margin: 80px auto 0; /* Increase top margin to create space from the header */
+    margin: 120px auto 0; /* Increased top margin for space from fixed elements */
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 10px;
@@ -112,11 +112,12 @@ html, body {
     z-index: 9999; /* Ensure it overlays everything */
 }
 
+/* Adjust for small screens */
 @media (max-width: 768px) {
     .contact-container {
         width: 95%; /* Adjust the width for smaller screens */
         padding: 15px;
-        margin: 70px auto 0; /* Adjust top margin for smaller screens */
+        margin: 100px auto 0; /* Adjust top margin for smaller screens */
     }
 
     .form-group input,
@@ -128,6 +129,5 @@ html, body {
         padding: 8px 16px;
     }
 }
-
 
   
