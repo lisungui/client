@@ -24,6 +24,7 @@ import TermsOfService from "../../views/TermsOfService";
 import PrivacyPolicy from "../../views/PrivacyPolicy";
 import CreateGig from "../../views/CreateGig";
 import ViewGigs from "../../views/ViewGigs";
+import ServiceRouter from "./ServiceRouter";
 
 const AppRouter = () => {
   return (
@@ -36,6 +37,7 @@ const AppRouter = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/services/*" element={<ServiceRouter />} />
 
           <Route
             path="/"

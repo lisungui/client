@@ -3,6 +3,7 @@ import { api, handleError } from "helpers/api";
 import "styles/views/ViewGigs.scss";
 import { auth } from "../../firebaseConfig";
 import { onAuthStateChanged, User } from "firebase/auth";
+import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
 
 interface Gig {
   id: string;
@@ -19,11 +20,14 @@ const ViewGigs: React.FC = () => {
   const [gigs, setGigs] = useState<Gig[]>([]);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<User | null>(null);
+  const [uid, setUid] = useState<string>(""); 
+  const navigate = useNavigate();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
+        setUid(user.uid);
       } else {
         setUser(null);
       }
@@ -66,12 +70,14 @@ const ViewGigs: React.FC = () => {
               <p><strong>Status:</strong> {gig.status}</p>
               <p><strong>Duration:</strong> {gig.duration}</p>
               <p><strong>Created:</strong> {new Date(gig.createdDate).toLocaleDateString()}</p>
-              <p><strong>Description:</strong>{gig.description}</p>
+              <p><strong>Description:</strong> {gig.description}</p>
             </div>
           ))}
         </div>
       ) : (
-        <p>No gigs found.</p>
+        <p className="no-gigs-message">
+          No gigs found. <span onClick={() => navigate(`/user/${uid}/create-gig`)} className="create-gig-link">Create a Gig</span>
+        </p>
       )}
     </div>
   );

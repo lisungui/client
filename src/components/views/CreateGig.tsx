@@ -6,12 +6,13 @@ import { Button } from "components/ui/Button";
 import { Spinner } from "components/ui/Spinner";
 import { auth } from "../../firebaseConfig";
 import { onAuthStateChanged, User } from "firebase/auth";
+import { categories } from "../shared/categories";
 
 const CreateGig: React.FC = () => {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
-    category: "",
+    category: categories[0], // Default to the first category
     price: "",
     duration: "",
     status: "Medium", // Default status
@@ -31,10 +32,8 @@ const CreateGig: React.FC = () => {
       }
     });
 
-    // Clean up the subscription on unmount
     return () => unsubscribe();
   }, []);
-
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -52,7 +51,7 @@ const CreateGig: React.FC = () => {
       navigate("/my-gigs");
     } catch (error) {
       console.error(`Something went wrong while creating the gig: \n${handleError(error)}`);
-      alert("An error occurred while creating the gig.");
+      alert("An error occurred while creating the gig");
     } finally {
       setLoading(false);
     }
@@ -69,6 +68,7 @@ const CreateGig: React.FC = () => {
             id="title"
             name="title"
             value={formData.title}
+            placeholder="Type here a title for your gig..."
             onChange={handleChange}
             required
           />
@@ -79,20 +79,26 @@ const CreateGig: React.FC = () => {
             id="description"
             name="description"
             value={formData.description}
+            placeholder="Type here a description for your gig..."
             onChange={handleChange}
             required
           />
         </div>
         <div className="form-field">
           <label htmlFor="category">Category:</label>
-          <input
-            type="text"
+          <select
             id="category"
             name="category"
             value={formData.category}
             onChange={handleChange}
             required
-          />
+          >
+            {categories.map((category, index) => (
+              <option key={index} value={category}>
+                {category}
+              </option>
+            ))}
+          </select>
         </div>
         <div className="form-field">
           <label htmlFor="price">Price:</label>
@@ -101,6 +107,7 @@ const CreateGig: React.FC = () => {
             id="price"
             name="price"
             value={formData.price}
+            placeholder="Type here the price for your gig..."
             onChange={handleChange}
             required
           />
@@ -112,6 +119,7 @@ const CreateGig: React.FC = () => {
             id="duration"
             name="duration"
             value={formData.duration}
+            placeholder="Type here the duration for your gig..."
             onChange={handleChange}
             required
           />
