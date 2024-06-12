@@ -1,5 +1,7 @@
 import React from "react";
 import "../../styles/services/AI.scss";
+import { FaBrain, FaRobot, FaEye, FaChartLine, FaLaptop } from "react-icons/fa"; // Icons for illustration
+import FetchGigsByCategory from "components/services/FetchGigsByCategory";
 
 const AI: React.FC = () => {
   return (
@@ -12,17 +14,32 @@ const AI: React.FC = () => {
         Our AI capabilities include:
       </p>
       <ul>
-        <li>Machine Learning Model Development</li>
-        <li>Natural Language Processing (NLP)</li>
-        <li>Computer Vision and Image Recognition</li>
-        <li>Predictive Analytics and Forecasting</li>
-        <li>AI Strategy and Consulting</li>
+        <li>
+          <FaBrain className="icon" /> Machine Learning Model Development
+        </li>
+        <li>
+          <FaRobot className="icon" /> Natural Language Processing (NLP)
+        </li>
+        <li>
+          <FaEye className="icon" /> Computer Vision and Image Recognition
+        </li>
+        <li>
+          <FaChartLine className="icon" /> Predictive Analytics and Forecasting
+        </li>
+        <li>
+          <FaLaptop className="icon" /> AI Strategy and Consulting
+        </li>
       </ul>
       <p>
         Partner with us to integrate AI into your operations and gain a competitive edge in the digital landscape.
       </p>
+      <div className="gigs-section">
+        <FetchGigsByCategory category="AI" />
+      </div>
     </div>
   );
 };
 
 export default AI;
+
+

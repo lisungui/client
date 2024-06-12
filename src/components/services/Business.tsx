@@ -1,9 +1,10 @@
 import React from "react";
-import "../../styles/services/Business.scss";
+import "../../styles/services/MachineLearning.scss";
+import FetchGigsByCategory from "components/services/FetchGigsByCategory";
 
 const Business: React.FC = () => {
   return (
-    <div className="business-container">
+    <div className="machine-learning-container">
       <h1>Business Services</h1>
       <p>
         Drive your business towards success with our comprehensive business services. We offer strategic guidance and practical solutions to help you achieve your goals and thrive in a competitive marketplace.
@@ -21,6 +22,9 @@ const Business: React.FC = () => {
       <p>
         Let us be your trusted partner in navigating the complexities of business and driving sustainable growth.
       </p>
+      <div className="gigs-section">
+        <FetchGigsByCategory category="Business" />
+      </div>
     </div>
   );
 };

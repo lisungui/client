@@ -1,0 +1,185 @@
+.fetch-gigs-by-category {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 150px; // Ensure it doesn't touch the Our Services section
+  
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+    }
+  
+    .loading, .error {
+      text-align: center;
+      font-size: 1.2rem;
+      color: #777;
+      margin: 20px 0;
+    }
+  
+    .gigs-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+  
+    .gig-card {
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      max-width: 300px;
+      width: 100%;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s, box-shadow 0.2s;
+  
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      }
+  
+      h3 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+        color: #4caf50; // Green color for titles
+      }
+  
+      p {
+        font-size: 0.9rem;
+        color: #666;
+  
+        strong {
+          color: #333;
+        }
+      }
+  
+      .buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+  
+        button {
+          padding: 10px 15px;
+          border: none;
+          border-radius: 5px;
+          font-size: 0.9rem;
+          cursor: pointer;
+          transition: background-color 0.3s;
+  
+          &.view-details {
+            background-color: #2196F3; // Blue color for View Details button
+            color: #fff;
+  
+            &:hover {
+              background-color: #1976D2;
+            }
+          }
+  
+          &.contact {
+            background-color: #4caf50; // Green color for Contact button
+            color: #fff;
+  
+            &:hover {
+              background-color: #45a049;
+            }
+          }
+        }
+      }
+  
+      // Add responsive design for smaller screens
+      @media (max-width: 768px) {
+        max-width: 100%;
+      }
+    }
+  
+    // Popup styling
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.5); // Dark background
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+  
+      .popup-content {
+        background-color: #fff;
+        border-radius: 8px;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        width: 100%;
+  
+        h3 {
+          font-size: 1.5rem;
+          color: #333;
+          margin-bottom: 10px;
+        }
+  
+        p {
+          font-size: 1rem;
+          color: #555;
+          margin-bottom: 20px;
+        }
+  
+        .popup-buttons {
+          display: flex;
+          justify-content: space-between;
+          gap: 10px;
+          margin-bottom: 20px;
+  
+          button {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+  
+            &:first-child {
+              background-color: #2196F3; // Blue for Login button
+              color: #fff;
+  
+              &:hover {
+                background-color: #1976D2;
+              }
+            }
+  
+            &:last-child {
+              background-color: #4caf50; // Green for Create an Account button
+              color: #fff;
+  
+              &:hover {
+                background-color: #45a049;
+              }
+            }
+          }
+        }
+  
+        .close-button {
+          padding: 10px 15px;
+          border: none;
+          border-radius: 5px;
+          background-color: #f44336; // Red color for Close button
+          color: #fff;
+          cursor: pointer;
+          font-size: 1rem;
+          transition: background-color 0.3s;
+  
+          &:hover {
+            background-color: #d32f2f;
+          }
+        }
+      }
+    }
+  }
+  
+  

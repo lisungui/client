@@ -1,5 +1,6 @@
 import React from "react";
 import "../../styles/services/ProgrammingTech.scss";
+import FetchGigsByCategory from "components/services/FetchGigsByCategory";
 
 const ProgrammingTech: React.FC = () => {
   return (
@@ -21,6 +22,9 @@ const ProgrammingTech: React.FC = () => {
       <p>
         Let us help you build and maintain technology solutions that drive your business forward.
       </p>
+      <div className="gigs-section">
+        <FetchGigsByCategory category="Programming and Tech" />
+      </div>
     </div>
   );
 };

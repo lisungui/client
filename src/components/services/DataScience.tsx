@@ -1,5 +1,6 @@
 import React from "react";
 import "../../styles/services/DataScience.scss";
+import FetchGigsByCategory from "components/services/FetchGigsByCategory";
 
 const DataScience: React.FC = () => {
   return (
@@ -21,6 +22,9 @@ const DataScience: React.FC = () => {
       <p>
         Partner with us to transform your data into actionable insights that propel your business forward.
       </p>
+      <div className="gigs-section">
+        <FetchGigsByCategory category="Data Science" />
+      </div>
     </div>
   );
 };

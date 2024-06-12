@@ -1,5 +1,6 @@
 import React from "react";
 import "../../styles/services/GraphicDesign.scss";
+import FetchGigsByCategory from "components/services/FetchGigsByCategory";
 
 const GraphicDesign: React.FC = () => {
   return (
@@ -21,6 +22,9 @@ const GraphicDesign: React.FC = () => {
       <p>
         Let us help you create a memorable and impactful brand identity that stands out in a crowded market.
       </p>
+      <div className="gigs-section">
+        <FetchGigsByCategory category="Graphic Design" />
+      </div>
     </div>
   );
 };

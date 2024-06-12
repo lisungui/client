@@ -1,34 +1,48 @@
-/* src/styles/services/ProgrammingTech.scss */
-
 .programming-tech-container {
-    max-width: 800px;
-    margin: 140px auto 0;
-    padding: 20px;
-    background-color: #e8f5e9;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: left;
-  
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-      color: #2e7d32;
-    }
-  
-    p {
-      font-size: 1.2rem;
-      margin-bottom: 15px;
-      color: #388e3c;
-    }
-  
-    ul {
-      list-style-type: disc;
-      padding-left: 20px;
-  
-      li {
-        font-size: 1.1rem;
-        margin-bottom: 10px;
-        color: #1b5e20;
+  padding: 20px;
+  margin-top: 150px; // Ensure it doesn't touch the Our Services section
+  background-color: #e8f5e9; // Light green background for Programming Tech
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+  h1 {
+    font-size: 2.5rem;
+    color: #2e7d32; // Dark green for the heading
+    margin-bottom: 20px;
+    text-align: center; // Center the heading
+  }
+
+  p {
+    font-size: 1.2rem;
+    color: #388e3c; // Medium green text for paragraphs
+    line-height: 1.6;
+    margin-bottom: 15px;
+    text-align: justify; // Justify the text for a neat look
+  }
+
+  ul {
+    list-style-type: none; // Remove default list styling
+    padding-left: 0; // Remove default padding
+    margin-bottom: 20px;
+
+    li {
+      font-size: 1.1rem;
+      color: #1b5e20; // Darker green for list items
+      font-weight: bold; // Make the text bold
+      margin-bottom: 10px;
+      transition: color 0.3s ease, border-left 0.3s ease; // Smooth transition for hover effect
+      text-align: center; // Center the text
+      display: flex; // Use flexbox for alignment
+      justify-content: center; // Center items horizontally
+      align-items: center; // Center items vertically
+
+      &:hover {
+        color: #43a047; // Lighter green on hover
       }
     }
-  }  
+  }
+
+  .gigs-section {
+    margin-top: 5px; // Reduce space between the Programming Tech container and gigs section
+  }
+}

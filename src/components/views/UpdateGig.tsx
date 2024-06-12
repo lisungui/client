@@ -1,28 +1,40 @@
-import React, { useState, useEffect } from "react";
-import "../../styles/views/CreateGig.scss";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { api, handleError } from "helpers/api";
-import { useNavigate } from "react-router-dom";
 import { Button } from "components/ui/Button";
 import { Spinner } from "components/ui/Spinner";
+import "../../styles/views/UpdateGig.scss";
 import { auth } from "../../firebaseConfig";
 import { onAuthStateChanged, User } from "firebase/auth";
-import { categories } from "../shared/categories";
 
-const CreateGig: React.FC = () => {
-  const [formData, setFormData] = useState({
+interface Gig {
+  title: string;
+  category: string;
+  description: string;
+  price: number;
+  status: string;
+  duration: string;
+  updatedDate: null;
+  updatedDeadline: null;
+}
+
+const UpdateGig: React.FC = () => {
+  const [formData, setFormData] = useState<Gig>({
     title: "",
+    category: "",
     description: "",
-    category: categories[0], // Default to the first category
-    price: "",
-    duration: "",
+    price: 0,
     status: "Medium", // Default status
-    deadline:null,
+    duration: "",
+    updatedDate: null,
+    updatedDeadline: null,
   });
 
-  const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
-
+  const [loading, setLoading] = useState(true);
+  const [updating, setUpdating] = useState(false);
   const [user, setUser] = useState<User | null>(null);
+  const navigate = useNavigate();
+  const { id } = useParams<{ id: string }>(); // Getting the gig ID from the URL
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -36,6 +48,23 @@ const CreateGig: React.FC = () => {
     return () => unsubscribe();
   }, []);
 
+  useEffect(() => {
+    const fetchGig = async () => {
+      try {
+        const response = await api.get(`/gig/${id}`);
+        setFormData(response.data);
+        setLoading(false);
+      } catch (error) {
+        console.error(`Failed to fetch gig: \n${handleError(error)}`);
+        setLoading(false);
+      }
+    };
+
+    if (id) {
+      fetchGig();
+    }
+  }, [id]);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prevFormData) => ({
@@ -46,21 +75,25 @@ const CreateGig: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
+    setUpdating(true);
     try {
-      await api.post(`/gigs/${user.uid}`, formData);
+      await api.put(`/updategig/${id}`, formData);
       navigate("/my-gigs");
     } catch (error) {
-      console.error(`Something went wrong while creating the gig: \n${handleError(error)}`);
-      alert("An error occurred while creating the gig");
+      console.error(`Failed to update gig: \n${handleError(error)}`);
+      alert("An error occurred while updating the gig.");
     } finally {
-      setLoading(false);
+      setUpdating(false);
     }
   };
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <div className="create-gig-container">
-      <h2>Create a New Gig</h2>
+    <div className="update-gig-container">
+      <h2>Update Gig</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-field">
           <label htmlFor="title">Title:</label>
@@ -69,7 +102,6 @@ const CreateGig: React.FC = () => {
             id="title"
             name="title"
             value={formData.title}
-            placeholder="Type here a title for your gig..."
             onChange={handleChange}
             required
           />
@@ -80,38 +112,23 @@ const CreateGig: React.FC = () => {
             id="description"
             name="description"
             value={formData.description}
-            placeholder="Type here a description for your gig..."
             onChange={handleChange}
             required
           />
         </div>
         <div className="form-field">
           <label htmlFor="category">Category:</label>
-          <select
-            id="category"
-            name="category"
-            value={formData.category}
-            onChange={handleChange}
-            required
-          >
-            {categories.map((category, index) => (
-              <option key={index} value={category}>
-                {category}
-              </option>
-            ))}
+          <select id="category" name="category" value={formData.category} onChange={handleChange} required>
+            <option value="Graphic Design">Graphic Design</option>
+            <option value="Digital Marketing">Digital Marketing</option>
+            <option value="Writing and Translation">Writing and Translation</option>
+            <option value="Programming and Tech">Programming and Tech</option>
+            <option value="Data Science">Data Science</option>
+            <option value="Business">Business</option>
+            <option value="Consulting">Consulting</option>
+            <option value="AI">AI</option>
+            <option value="Machine Learning">Machine Learning</option>
           </select>
-        </div>
-        <div className="form-field">
-          <label htmlFor="deadline">Deadline:</label>
-          <input
-            type="date"
-            id="deadline"
-            name="deadline"
-            value={formData.deadline}
-            placeholder="Type here the deadline for your gig..."
-            onChange={handleChange}
-            required
-          />
         </div>
         <div className="form-field">
           <label htmlFor="price">Price:</label>
@@ -120,7 +137,6 @@ const CreateGig: React.FC = () => {
             id="price"
             name="price"
             value={formData.price}
-            placeholder="Type here the price for your gig..."
             onChange={handleChange}
             required
           />
@@ -132,7 +148,6 @@ const CreateGig: React.FC = () => {
             id="duration"
             name="duration"
             value={formData.duration}
-            placeholder="Type here the duration for your gig..."
             onChange={handleChange}
             required
           />
@@ -145,12 +160,12 @@ const CreateGig: React.FC = () => {
             <option value="Low">Low</option>
           </select>
         </div>
-        <Button type="submit" disabled={loading}>
-          {loading ? <Spinner size="small" /> : "Create Gig"}
+        <Button type="submit" disabled={updating}>
+          {updating ? <Spinner size="small" /> : "Update Gig"}
         </Button>
       </form>
     </div>
   );
 };
 
-export default CreateGig;
+export default UpdateGig;

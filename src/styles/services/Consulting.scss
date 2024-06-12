@@ -1,34 +1,45 @@
 /* src/styles/services/Consulting.scss */
 
 .consulting-container {
-    max-width: 800px;
-    margin: 140px auto 0;
-    padding: 20px;
-    background-color: #e8eaf6;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: left;
-  
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-      color: #3f51b5;
-    }
-  
-    p {
-      font-size: 1.2rem;
-      margin-bottom: 15px;
-      color: #303f9f;
-    }
-  
-    ul {
-      list-style-type: disc;
-      padding-left: 20px;
-  
-      li {
-        font-size: 1.1rem;
-        margin-bottom: 10px;
-        color: #1a237e;
+  padding: 20px;
+  margin-top: 150px; 
+  background-color: #e8eaf6; // Light blue background
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center; // Center align text within the container
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #3f51b5; // Indigo color for the heading
+    text-align: center; // Center the heading
+  }
+
+  p {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    color: #303f9f; // Darker indigo color for the text
+    text-align: justify; // Justify the paragraph text
+  }
+
+  ul {
+    list-style-type: none; // Remove default list styling
+    padding-left: 0; // Remove default padding
+    margin-bottom: 20px;
+
+    li {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+      color: #1a237e; // Dark blue color for list items
+      font-weight: bold; // Make the text bold
+      display: flex; // Use flexbox for alignment
+      justify-content: center; // Center items horizontally
+      align-items: center; // Center items vertically
+      transition: color 0.3s ease, border-left 0.3s ease; // Smooth transition for hover effect
+
+      &:hover {
+        color: #388e3c; // Green color on hover
       }
     }
-  }  
+  }
+}

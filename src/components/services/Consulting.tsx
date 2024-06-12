@@ -1,5 +1,6 @@
 import React from "react";
 import "../../styles/services/Consulting.scss";
+import FetchGigsByCategory from "components/services/FetchGigsByCategory";
 
 const Consulting: React.FC = () => {
   return (
@@ -21,6 +22,9 @@ const Consulting: React.FC = () => {
       <p>
         Work with us to develop and implement strategies that drive success and foster a culture of continuous improvement.
       </p>
+      <div className="gigs-section">
+        <FetchGigsByCategory category="Consulting" />
+      </div>
     </div>
   );
 };

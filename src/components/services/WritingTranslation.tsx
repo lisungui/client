@@ -1,5 +1,6 @@
 import React from "react";
 import "../../styles/services/WritingTranslation.scss";
+import FetchGigsByCategory from "components/services/FetchGigsByCategory";
 
 const WritingTranslation: React.FC = () => {
   return (
@@ -21,6 +22,9 @@ const WritingTranslation: React.FC = () => {
       <p>
         Trust us to deliver high-quality content that resonates with your audience and meets your business goals.
       </p>
+      <div className="gigs-section">
+        <FetchGigsByCategory category="Writing & Translation" />
+      </div>
     </div>
   );
 };

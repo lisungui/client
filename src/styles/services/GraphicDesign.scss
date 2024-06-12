@@ -1,35 +1,52 @@
 /* src/styles/services/GraphicDesign.scss */
 
 .graphic-design-container {
-    max-width: 800px;
-    margin: 140px auto 0; // Added top margin to separate from "Our Services" section
-    padding: 20px;
-    background-color: #f3e5f5;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: left;
-  
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-      color: #8e24aa;
-    }
-  
-    p {
-      font-size: 1.2rem;
-      margin-bottom: 15px;
-      color: #6a1b9a;
-    }
-  
-    ul {
-      list-style-type: disc;
-      padding-left: 20px;
-  
-      li {
-        font-size: 1.1rem;
-        margin-bottom: 10px;
-        color: #4a148c;
+  padding: 20px;
+  margin-top: 150px; // Ensure it doesn't touch the Our Services section
+  background-color: #f3e5f5; // Light purple background for Graphic Design
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+  h1 {
+    font-size: 2.5rem;
+    color: #8e24aa; // Purple color for the heading
+    margin-bottom: 20px;
+    text-align: center; // Center the heading
+  }
+
+  p {
+    font-size: 1.2rem;
+    color: #6a1b9a; // Darker purple text for paragraphs
+    line-height: 1.6;
+    margin-bottom: 15px;
+    text-align: justify; // Justify the text for a neat look
+  }
+
+  ul {
+    list-style-type: none; // Remove default list styling
+    padding-left: 0; // Remove default padding
+    margin-bottom: 20px;
+
+    li {
+      font-size: 1.1rem;
+      color: #4a148c; // Deep purple for list items
+      font-weight: bold; // Make the text bold
+      margin-bottom: 10px;
+      transition: color 0.3s ease, border-left 0.3s ease; // Smooth transition for hover effect
+      text-align: center; // Center the text
+      display: flex; // Use flexbox for alignment
+      justify-content: center; // Center items horizontally
+      align-items: center; // Center items vertically
+
+      &:hover {
+        color: #388e3c; // Green color on hover
       }
     }
   }
+
+  .gigs-section {
+    margin-top: 10px; // Slightly reduce space between the Graphic Design container and gigs section
+  }
+}
+
   

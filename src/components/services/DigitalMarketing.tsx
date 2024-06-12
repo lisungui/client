@@ -1,5 +1,6 @@
 import React from "react";
 import "../../styles/services/DigitalMarketing.scss";
+import FetchGigsByCategory from "components/services/FetchGigsByCategory";
 
 const DigitalMarketing: React.FC = () => {
   return (
@@ -21,6 +22,9 @@ const DigitalMarketing: React.FC = () => {
       <p>
         Partner with us to create a data-driven marketing strategy that delivers measurable growth and success.
       </p>
+      <div className="gigs-section">
+        <FetchGigsByCategory category="Digital Marketing" />
+      </div>
     </div>
   );
 };

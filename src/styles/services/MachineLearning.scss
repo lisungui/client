@@ -1,36 +1,58 @@
-/* src/styles/services/MachineLearning.scss */
-
 .machine-learning-container {
-    max-width: 800px;
-    margin: 140px auto 0; // Increased top margin to 100px
-    padding: 20px;
-    background-color: #f3e5f5;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: left;
-  
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-      color: #8e24aa;
-    }
-  
-    p {
-      font-size: 1.2rem;
-      margin-bottom: 15px;
-      color: #6a1b9a;
-    }
-  
-    ul {
-      list-style-type: disc;
-      padding-left: 20px;
-  
-      li {
-        font-size: 1.1rem;
-        margin-bottom: 10px;
-        color: #4a148c;
+  padding: 20px;
+  margin-top: 150px; // Ensure it doesn't touch the Our Services section
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+  h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center; // Center the heading
+  }
+
+  p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    text-align: justify; // Justify the text for a neat look
+  }
+
+  ul {
+    list-style-type: none; // Remove default list styling
+    padding-left: 0; // Remove default padding
+    margin-bottom: 20px;
+
+    li {
+      font-size: 1rem;
+      color: #000; // Set initial color to black
+      font-weight: bold; // Make the text bold
+      margin-bottom: 10px;
+      transition: color 0.3s ease, border-left 0.3s ease; // Smooth transition for hover effect
+      text-align: center; // Center the text
+      display: flex; // Use flexbox for alignment
+      justify-content: center; // Center items horizontally
+      align-items: center; // Center items vertically
+
+      .icon {
+        margin-right: 10px; // Space between icon and text
+        color: #1abc9c; // Light teal for icons
+        font-size: 1.2rem; // Slightly larger icon size
+      }
+
+      &:hover {
+        color: #3498db; // Blue color on hover
+        .icon {
+          color: #3498db; // Match icon color on hover
+        }
       }
     }
   }
-  
+
+  .gigs-section {
+    margin-top: 5px; // Reduce space between the machine learning container and gigs section
+  }
+}
   
