@@ -29,10 +29,16 @@ const FetchGigsByCategory: React.FC<FetchGigsByCategoryProps> = ({ category }) =
   const [user, setUser] = useState<User | null>(null);
   const [showLoginPopup, setShowLoginPopup] = useState(false); // State to show/hide login popup
   const navigate = useNavigate(); // Use navigate for navigation
+  const [uid, setUid] = useState<string>("");
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
+      if (user) {
+        setUid(user.uid);
+      } else {
+        setUid("");
+      }
     });
 
     return () => unsubscribe();
@@ -69,9 +75,9 @@ const FetchGigsByCategory: React.FC<FetchGigsByCategoryProps> = ({ category }) =
     navigate(`/gigs/${gigId}`);
   };
 
-  const handleContact = (gigId: string) => {
+  const handleContact = (userCreatorId: string) => {
     if (user) {
-      navigate(`/send-message/${gigId}`);
+      navigate(`/messages/${uid}/${userCreatorId}`);
     } else {
       setShowLoginPopup(true);
     }
@@ -99,7 +105,7 @@ const FetchGigsByCategory: React.FC<FetchGigsByCategoryProps> = ({ category }) =
               <p><strong>Created By:</strong>{gig.userCreator}</p>
               <div className="buttons">
                 <button className="view-details" onClick={() => handleViewDetails(gig.id)}>View Details</button>
-                <button className="contact" onClick={() => handleContact(gig.id)}>Contact</button>
+                <button className="contact" onClick={() => handleContact(gig.userCreator)}>Contact</button>
               </div>
             </div>
           ))}

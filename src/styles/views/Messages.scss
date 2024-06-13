@@ -170,6 +170,10 @@
       height: 100%;
       font-size: 1.5rem;
       color: #666;
+
+      p {
+        color: red; // Change the text color to red
+      }
     }
   }
 
@@ -232,7 +236,6 @@
     }
   }
 }
-
 
 
   

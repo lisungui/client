@@ -61,6 +61,15 @@ const AppRouter = () => {
           />
 
           <Route
+            path="/messages/:userId/:selectedUserId"
+            element={
+              <RequiredAuth>
+                <Messages />
+              </RequiredAuth>
+            }
+          />
+
+          <Route
             path="/user/:id/create-gig"
             element={
               <RequiredAuth>
