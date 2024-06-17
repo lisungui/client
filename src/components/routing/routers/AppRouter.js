@@ -25,6 +25,7 @@ import PrivacyPolicy from "../../views/PrivacyPolicy";
 import CreateGig from "../../views/CreateGig";
 import ViewGigs from "../../views/ViewGigs";
 import ServiceRouter from "./ServiceRouter";
+import UpdateGig from "../../views/UpdateGig";
 
 const AppRouter = () => {
   return (
@@ -65,6 +66,15 @@ const AppRouter = () => {
             element={
               <RequiredAuth>
                 <Messages />
+              </RequiredAuth>
+            }
+          />
+
+          <Route
+            path="/my-gigs/updategig/:userId/:gigId"
+            element={
+              <RequiredAuth>
+                <UpdateGig />
               </RequiredAuth>
             }
           />

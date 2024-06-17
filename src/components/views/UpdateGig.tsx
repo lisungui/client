@@ -14,6 +14,7 @@ interface Gig {
   price: number;
   status: string;
   duration: string;
+  deadline: string | null; // Make sure deadline is nullable
   updatedDate: null;
   updatedDeadline: null;
 }
@@ -24,6 +25,7 @@ const UpdateGig: React.FC = () => {
     category: "",
     description: "",
     price: 0,
+    deadline: null,
     status: "Medium", // Default status
     duration: "",
     updatedDate: null,
@@ -34,7 +36,7 @@ const UpdateGig: React.FC = () => {
   const [updating, setUpdating] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const navigate = useNavigate();
-  const { id } = useParams<{ id: string }>(); // Getting the gig ID from the URL
+  const { userId, gigId } = useParams<{ userId: string, gigId: string }>();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -51,8 +53,15 @@ const UpdateGig: React.FC = () => {
   useEffect(() => {
     const fetchGig = async () => {
       try {
-        const response = await api.get(`/gig/${id}`);
-        setFormData(response.data);
+        const response = await api.get(`/gigs/${userId}/${gigId}`);
+        const gigData = response.data;
+
+        // Convert the deadline to yyyy-MM-dd format
+        if (gigData.deadline) {
+          gigData.deadline = gigData.deadline.split("T")[0];
+        }
+
+        setFormData(gigData);
         setLoading(false);
       } catch (error) {
         console.error(`Failed to fetch gig: \n${handleError(error)}`);
@@ -60,10 +69,10 @@ const UpdateGig: React.FC = () => {
       }
     };
 
-    if (id) {
+    if (userId && gigId) {
       fetchGig();
     }
-  }, [id]);
+  }, [userId, gigId]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -77,7 +86,7 @@ const UpdateGig: React.FC = () => {
     e.preventDefault();
     setUpdating(true);
     try {
-      await api.put(`/updategig/${id}`, formData);
+      await api.put(`/gigs/updategig/${userId}/${gigId}`, formData);
       navigate("/my-gigs");
     } catch (error) {
       console.error(`Failed to update gig: \n${handleError(error)}`);
@@ -93,7 +102,8 @@ const UpdateGig: React.FC = () => {
 
   return (
     <div className="update-gig-container">
-      <h2>Update Gig</h2>
+      <h1>Update Your Gig</h1>
+      <h2>Modify the details of your gig below:</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-field">
           <label htmlFor="title">Title:</label>
@@ -142,12 +152,12 @@ const UpdateGig: React.FC = () => {
           />
         </div>
         <div className="form-field">
-          <label htmlFor="duration">Duration (days):</label>
+          <label htmlFor="deadline">Deadline:</label>
           <input
-            type="number"
-            id="duration"
-            name="duration"
-            value={formData.duration}
+            type="date"
+            id="deadline"
+            name="deadline"
+            value={formData.deadline || ""}
             onChange={handleChange}
             required
           />

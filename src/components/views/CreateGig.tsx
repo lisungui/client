@@ -14,7 +14,6 @@ const CreateGig: React.FC = () => {
     description: "",
     category: categories[0], // Default to the first category
     price: "",
-    duration: "",
     status: "Medium", // Default status
     deadline:null,
   });
@@ -121,18 +120,6 @@ const CreateGig: React.FC = () => {
             name="price"
             value={formData.price}
             placeholder="Type here the price for your gig..."
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-field">
-          <label htmlFor="duration">Duration (days):</label>
-          <input
-            type="number"
-            id="duration"
-            name="duration"
-            value={formData.duration}
-            placeholder="Type here the duration for your gig..."
             onChange={handleChange}
             required
           />

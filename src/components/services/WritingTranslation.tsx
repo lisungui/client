@@ -23,7 +23,7 @@ const WritingTranslation: React.FC = () => {
         Trust us to deliver high-quality content that resonates with your audience and meets your business goals.
       </p>
       <div className="gigs-section">
-        <FetchGigsByCategory category="Writing & Translation" />
+        <FetchGigsByCategory category="Writing and Translation" />
       </div>
     </div>
   );

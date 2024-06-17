@@ -7,7 +7,7 @@ import { isProduction } from "./isProduction"
  * @returns {string}
  */
 export const getDomain = () => {
-  const prodUrl = "http://ec2-51-20-250-190.eu-north-1.compute.amazonaws.com:8080" // TODO: insert your prod url for server (once deployed)
+  const prodUrl = "ec2-51-20-77-139.eu-north-1.compute.amazonaws.com:8080"
   const devUrl = "http://localhost:8080"
 
   return isProduction() ? prodUrl : devUrl

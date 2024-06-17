@@ -44,7 +44,6 @@ const ViewGigs: React.FC = () => {
         try {
           const response = await api.get(`/listgigs/${user.uid}`);
           setGigs(response.data);
-          console.log("List of gigs: ", response.data);
           setLoading(false);
         } catch (error) {
           console.error(`Failed to fetch gigs: \n${handleError(error)}`);
@@ -79,7 +78,7 @@ const ViewGigs: React.FC = () => {
               {user && user.uid === gig.userCreator && (
                 <button
                   className="update-button"
-                  onClick={() => navigate(`/updategig/${gig.id}`)}
+                  onClick={() => navigate(`/my-gigs/updategig/${uid}/${gig.id}`)}
                 >
                   Update
                 </button>

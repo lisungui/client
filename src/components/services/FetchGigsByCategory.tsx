@@ -15,7 +15,9 @@ interface Gig {
   duration: string;
   createdDate: string;
   deadline: string;
-  creator: string;
+  userCreator: string;
+  userCreatorName: string | null;
+  userCreatorEmail: string;
 }
 
 interface FetchGigsByCategoryProps {
@@ -102,10 +104,13 @@ const FetchGigsByCategory: React.FC<FetchGigsByCategoryProps> = ({ category }) =
               <p><strong>Created:</strong> {new Date(gig.createdDate).toLocaleDateString()}</p>
               <p><strong>Deadline:</strong> {new Date(gig.deadline).toLocaleDateString()}</p>
               <p><strong>Description:</strong> {gig.description}</p>
-              <p><strong>Created By:</strong>{gig.userCreator}</p>
+              {/* Conditionally render creator's name or email */}
+              <p>
+                <strong>Created By:</strong> {gig.userCreatorName || gig.userCreatorEmail}
+              </p>
               <div className="buttons">
                 <button className="view-details" onClick={() => handleViewDetails(gig.id)}>View Details</button>
-                <button className="contact" onClick={() => handleContact(gig.userCreator)}>Contact</button>
+                <button className="contact" onClick={() => handleContact(gig.creator)}>Contact</button>
               </div>
             </div>
           ))}
@@ -122,7 +127,7 @@ const FetchGigsByCategory: React.FC<FetchGigsByCategoryProps> = ({ category }) =
             <p>To contact the desired person, please login or create an account.</p>
             <div className="popup-buttons">
               <button onClick={() => navigate("/login")}>Login</button>
-              <button onClick={() => navigate("/create-account")}>Create an Account</button>
+              <button onClick={() => navigate("/register")}>Create an Account</button>
             </div>
             <button className="close-button" onClick={closePopup}>Close</button>
           </div>
