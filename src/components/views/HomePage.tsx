@@ -5,6 +5,7 @@ import HowItWorks from "./HowItWorks";
 import CallToAction from "./CallToAction";
 import FeatureUpdates from "./FeatureUpdates";
 import OurServices from "./OurServices";
+import MeetOurFreelancers from "./MeetOurFreelancer";
 
 const HomePage: React.FC = () => {
   return (
@@ -12,6 +13,7 @@ const HomePage: React.FC = () => {
       <HeroSection />
       <FeaturesSection />
       <HowItWorks />
+      <MeetOurFreelancers />
       <FeatureUpdates />
       <CallToAction />
     </div>

@@ -26,6 +26,7 @@ import CreateGig from "../../views/CreateGig";
 import ViewGigs from "../../views/ViewGigs";
 import ServiceRouter from "./ServiceRouter";
 import UpdateGig from "../../views/UpdateGig";
+import Freelancing from "../../views/Freelancing";
 
 const AppRouter = () => {
   return (
@@ -75,6 +76,15 @@ const AppRouter = () => {
             element={
               <RequiredAuth>
                 <UpdateGig />
+              </RequiredAuth>
+            }
+          />
+
+          <Route
+            path="/freelancing"
+            element={
+              <RequiredAuth>
+                <Freelancing />
               </RequiredAuth>
             }
           />

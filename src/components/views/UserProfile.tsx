@@ -17,7 +17,7 @@ const UserProfile: React.FC = () => {
         setLoading(false);
       } catch (error) {
         console.error(
-          `Something went wrong while fetching the user data: \n${handleError(error)}`
+          `Something went wrong while fetching the user data**********: \n${handleError(error)}`
         );
         console.error("Details:", error);
         setLoading(false);

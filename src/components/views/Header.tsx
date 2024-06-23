@@ -67,6 +67,9 @@ const Header: React.FC<{ height?: string }> = (props) => {
             <Button onClick={() => navigate("/my-gigs")} className="nav-button">
               My Gigs
             </Button>
+            <Button onClick={() => navigate("/freelancing")} className="nav-button">
+              Freelancing
+            </Button>
             <Button onClick={() => navigate("/messages")} className="nav-button">
               Messages
             </Button>

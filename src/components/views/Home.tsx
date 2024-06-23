@@ -15,19 +15,32 @@ import Links from "./Links";
 const Home = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
+  const [userId, setUserId] = useState<string | null>(null);
 
+  // Monitor Firebase authentication state
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
+        setUserId(user.uid);
+        fetchUserData(user.uid);
       } else {
         setUser(null);
+        setUserId(null);
       }
     });
 
     // Clean up the subscription on unmount
     return () => unsubscribe();
   }, []);
+
+  const fetchUserData = async (uid: string) => {
+    try {
+      const response = await api.get(`/users/${uid}`);
+    } catch (error) {
+      console.error("Failed to fetch user data from home:", error);
+    }
+  };
 
   return (
     <div className="home-container">
