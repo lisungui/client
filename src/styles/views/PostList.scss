@@ -1,0 +1,30 @@
+.post-list {
+    .post-item {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 10px;
+      margin-bottom: 10px;
+  
+      h3 {
+        margin: 0;
+        color: #4caf50;
+      }
+  
+      p {
+        margin: 5px 0 0;
+      }
+    }
+  
+    @media (max-width: 600px) {
+      .post-item {
+        h3 {
+          font-size: 1.2rem;
+        }
+  
+        p {
+          font-size: 0.9rem;
+        }
+      }
+    }
+  }   

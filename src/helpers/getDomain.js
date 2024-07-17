@@ -8,7 +8,7 @@ import { isProduction } from "./isProduction"
  */
 export const getDomain = () => {
   const prodUrl = "http://ec2-51-20-77-139.eu-north-1.compute.amazonaws.com:8080"
-  const devUrl = "http://localhost:8080"
+  const devUrl = "http://localhost:8081"
 
   return isProduction() ? prodUrl : devUrl
 }

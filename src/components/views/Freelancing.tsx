@@ -1,13 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/views/Freelancing.scss";
 import MeetOurFreelancers from "./MeetOurFreelancer";
+import { onAuthStateChanged, User } from "firebase/auth";
+import { auth } from "../../firebaseConfig";
+import { api, handleError } from "helpers/api";
 
 const Freelancing: React.FC = () => {
   const navigate = useNavigate();
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   const handleBecomeFreelancerClick = () => {
-    navigate("/register"); // Navigate to the registration page or relevant page
+    navigate("/freelancers/create");
   };
 
   return (

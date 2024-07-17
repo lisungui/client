@@ -40,6 +40,19 @@
       .user-name {
         font-weight: bold;
         color: #333;
+        position: relative; // To position the unread count badge
+      }
+
+      .unread-count {
+        position: absolute;
+        top: 50%;
+        right: -15px;
+        transform: translateY(-50%);
+        background-color: green;
+        color: white;
+        border-radius: 50%;
+        padding: 2px 6px;
+        font-size: 0.8rem;
       }
     }
   }
@@ -106,17 +119,30 @@
           color: #333;
         }
 
-        .timestamp {
-          font-size: 0.8rem;
-          color: #999;
+        .message-footer {
+          display: flex;
+          align-items: center; // Align timestamp and like icon
           margin-top: 5px;
 
-          &.sent {
-            align-self: flex-end; // Keep the timestamp on the right for sent messages
+          .timestamp {
+            font-size: 0.8rem;
+            color: #999;
           }
 
-          &.received {
-            align-self: flex-start; // Move the timestamp to the left for received messages
+          .like-icon {
+            margin-left: 10px;
+            cursor: pointer;
+            transition: color 0.3s;
+            font-size: 1rem;
+
+            &.fa-heart {
+              color: red;
+            }
+
+            &.fa-heart-o {
+              color: white;
+              border: 1px solid black;
+            }
           }
         }
       }
@@ -236,6 +262,259 @@
     }
   }
 }
+
+// .messages-container {
+//   display: flex;
+//   height: calc(100vh - 70px); // Adjust height to account for the header (assumed header height is 70px)
+//   max-width: 1200px;
+//   margin: 150px auto 0; // Increase top margin to create more space below the "Our Services" section
+//   border: 1px solid #ddd;
+//   border-radius: 8px;
+//   background-color: #f9f9f9;
+//   overflow: hidden;
+
+//   .user-list {
+//     width: 30%;
+//     max-width: 300px;
+//     border-right: 1px solid #ddd;
+//     overflow-y: auto;
+//     background-color: #f1f1f1;
+
+//     .user-item {
+//       display: flex;
+//       align-items: center;
+//       padding: 15px;
+//       cursor: pointer;
+//       transition: background-color 0.2s;
+
+//       &:hover {
+//         background-color: #eaeaea;
+//       }
+
+//       &.selected {
+//         background-color: #ddd;
+//       }
+
+//       .user-picture {
+//         width: 40px;
+//         height: 40px;
+//         border-radius: 50%;
+//         margin-right: 15px;
+//       }
+
+//       .user-name {
+//         font-weight: bold;
+//         color: #333;
+//       }
+//     }
+//   }
+
+//   .chat-box {
+//     flex: 1;
+//     display: flex;
+//     flex-direction: column;
+//     overflow: hidden; // Prevents the chat-box itself from scrolling
+
+//     .chat-header {
+//       display: flex;
+//       align-items: center;
+//       padding: 15px;
+//       border-bottom: 1px solid #ddd;
+//       background-color: #fff;
+
+//       .chat-header-picture {
+//         width: 50px;
+//         height: 50px;
+//         border-radius: 50%;
+//         margin-right: 15px;
+//         cursor: pointer; // Make it clear that the picture is clickable
+//       }
+
+//       .chat-header-name {
+//         font-size: 1.2rem;
+//         font-weight: bold;
+//         color: #333;
+//       }
+//     }
+
+//     .messages-list {
+//       flex: 1;
+//       overflow-y: auto; // Enable vertical scrolling within the messages list
+//       padding: 20px;
+//       display: flex;
+//       flex-direction: column;
+
+//       .message-item {
+//         margin-bottom: 15px;
+//         display: flex;
+//         flex-direction: column;
+
+//         &.sent {
+//           align-items: flex-end;
+//         }
+
+//         &.received {
+//           align-items: flex-start;
+//         }
+
+//         .message-content {
+//           background-color: #4caf50; // Green background for sent messages
+//           color: #fff;
+//           padding: 10px;
+//           border-radius: 10px;
+//           max-width: 70%;
+//           word-wrap: break-word;
+//         }
+
+//         &.received .message-content {
+//           background-color: #ddd; // Grey background for received messages
+//           color: #333;
+//         }
+
+//         .message-footer {
+//           display: flex;
+//           align-items: center; // Align timestamp and like icon
+//           margin-top: 5px;
+
+//           .timestamp {
+//             font-size: 0.8rem;
+//             color: #999;
+//           }
+
+//           .like-icon {
+//             margin-left: 10px;
+//             cursor: pointer;
+//             transition: color 0.3s;
+//             font-size: 1rem;
+
+//             &.fa-heart {
+//               color: red;
+//             }
+
+//             &.fa-heart-o {
+//               color: white;
+//               border: 1px solid black;
+//             }
+//           }
+//         }
+//       }
+//     }
+
+//     .message-input {
+//       display: flex;
+//       padding: 15px;
+//       border-top: 1px solid #ddd;
+//       background-color: #fff;
+
+//       input {
+//         flex: 1;
+//         padding: 10px;
+//         border: 1px solid #ddd;
+//         border-radius: 5px;
+//         margin-right: 10px;
+//         font-size: 1rem;
+
+//         &:focus {
+//           outline: none;
+//           border-color: #4caf50;
+//         }
+//       }
+
+//       button {
+//         padding: 10px 15px;
+//         border: none;
+//         border-radius: 5px;
+//         background-color: #4caf50;
+//         color: #fff;
+//         cursor: pointer;
+//         font-size: 1rem;
+//         transition: background-color 0.3s;
+
+//         &:hover {
+//           background-color: #45a049;
+//         }
+
+//         &:disabled {
+//           background-color: #ccc; // Disabled button color
+//           cursor: not-allowed; // Indicate that the button is not clickable
+//         }
+//       }
+//     }
+
+//     .no-user-selected {
+//       display: flex;
+//       align-items: center;
+//       justify-content: center;
+//       height: 100%;
+//       font-size: 1.5rem;
+//       color: #666;
+
+//       p {
+//         color: red; // Change the text color to red
+//       }
+//     }
+//   }
+
+//   // Profile Popup styling
+//   .profile-popup {
+//     position: fixed;
+//     top: 50%;
+//     left: 50%;
+//     transform: translate(-50%, -50%);
+//     background-color: #fff;
+//     border-radius: 10px;
+//     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+//     z-index: 1000;
+//     padding: 20px;
+//     max-width: 300px;
+//     text-align: center;
+
+//     .popup-content {
+//       display: flex;
+//       flex-direction: column;
+//       align-items: center;
+
+//       .popup-picture {
+//         width: 100px;
+//         height: 100px;
+//         border-radius: 50%;
+//         margin-bottom: 15px;
+//       }
+
+//       h2 {
+//         margin-bottom: 10px;
+//         font-size: 1.5rem;
+//         color: #333;
+//       }
+
+//       p {
+//         margin-bottom: 10px;
+//         font-size: 1rem;
+//         color: #666;
+
+//         strong {
+//           color: #333; // Bold labels
+//         }
+//       }
+
+//       .close-button {
+//         padding: 10px 15px;
+//         border: none;
+//         border-radius: 5px;
+//         background-color: #4caf50;
+//         color: #fff;
+//         cursor: pointer;
+//         font-size: 1rem;
+//         transition: background-color 0.3s;
+
+//         &:hover {
+//           background-color: #45a049;
+//         }
+//       }
+//     }
+//   }
+// }
+
 
 
   

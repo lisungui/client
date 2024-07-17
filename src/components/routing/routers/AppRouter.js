@@ -27,6 +27,9 @@ import ViewGigs from "../../views/ViewGigs";
 import ServiceRouter from "./ServiceRouter";
 import UpdateGig from "../../views/UpdateGig";
 import Freelancing from "../../views/Freelancing";
+import CreateFreelancerProfile from "../../views/CreateFreelancerProfile";
+import CreatePost from "../../views/CreatePost";
+import ForumPage from "../../views/ForumPage";
 
 const AppRouter = () => {
   return (
@@ -40,6 +43,8 @@ const AppRouter = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/services/*" element={<ServiceRouter />} />
+          <Route path="/forum/create-post" element={<CreatePost />} />
+          <Route path="/forum" element={<ForumPage />} />
 
           <Route
             path="/"
@@ -81,7 +86,7 @@ const AppRouter = () => {
           />
 
           <Route
-            path="/freelancing"
+            path="/become-freelancer"
             element={
               <RequiredAuth>
                 <Freelancing />
@@ -185,10 +190,18 @@ const AppRouter = () => {
             }
           />
           <Route
-            path="/freelancers"
+            path="/freelancer"
             element={
               <RequiredAuth>
                 <Freelancer />
+              </RequiredAuth>
+            }
+          />
+          <Route
+            path="/freelancers/create"
+            element={
+              <RequiredAuth>
+                <CreateFreelancerProfile />
               </RequiredAuth>
             }
           />

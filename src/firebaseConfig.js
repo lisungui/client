@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, GithubAuthProvider, PhoneAuthProvider, EmailAuthProvider, signOut } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -12,10 +13,6 @@ const firebaseConfig = {
   measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
 };
 
-// // Initialize Firebase
-// const app = initializeApp(firebaseConfig);
-// const analytics = getAnalytics(app);
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
@@ -26,4 +23,7 @@ const githubProvider = new GithubAuthProvider();
 const phoneProvider = new PhoneAuthProvider();
 const emailPasswordProvider = new EmailAuthProvider();
 
-export { auth, googleProvider, githubProvider, phoneProvider, emailPasswordProvider, signOut };
+// Initialize Firestore
+const db = getFirestore(app);
+
+export { auth, googleProvider, githubProvider, phoneProvider, emailPasswordProvider, signOut, db };

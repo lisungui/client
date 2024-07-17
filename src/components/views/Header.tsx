@@ -13,6 +13,7 @@ const Header: React.FC<{ height?: string }> = (props) => {
   const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
   const [picture, setPicture] = useState<string | null>(null);
+  const [userData, setUserData] = useState<any | null>(null);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -36,8 +37,17 @@ const Header: React.FC<{ height?: string }> = (props) => {
     try {
       const response = await api.get(`/users/${uid}`);
       setPicture(response.data.picture);
+      setUserData(response.data);
     } catch (error) {
       console.error("Failed to fetch user profile picture:", error);
+    }
+  };
+
+  const handleNavigateFreelancer = () => {
+    if (userData && userData.role === "freelancer") {
+      navigate("/freelancer");
+    } else {
+      navigate("/become-freelancer");
     }
   };
 
@@ -59,6 +69,9 @@ const Header: React.FC<{ height?: string }> = (props) => {
         <Button onClick={navigateToHome} className="nav-button">
           Home
         </Button>
+        <Button onClick={() => navigate("/forum")} className="nav-button">
+          Forum
+        </Button>
         {user && (
           <>
             <Button onClick={() => navigate("/dashboard")} className="nav-button">
@@ -67,7 +80,7 @@ const Header: React.FC<{ height?: string }> = (props) => {
             <Button onClick={() => navigate("/my-gigs")} className="nav-button">
               My Gigs
             </Button>
-            <Button onClick={() => navigate("/freelancing")} className="nav-button">
+            <Button onClick={handleNavigateFreelancer} className="nav-button">
               Freelancing
             </Button>
             <Button onClick={() => navigate("/messages")} className="nav-button">

@@ -1,0 +1,152 @@
+.create-freelancer-profile {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 140px;
+  
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  
+    .form-section {
+      margin-bottom: 20px;
+  
+      h2 {
+        display: flex;
+        align-items: center;
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+        position: relative;
+        color: #333;
+        flex: 0 0 auto; /* Ensure h2 is not flexed */
+      }
+  
+      h2:after {
+        content: "";
+        flex: 1;
+        height: 2px;
+        background-color: #4caf50;
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+  
+      .form-group {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+  
+        input,
+        textarea,
+        select {
+          flex: 1;
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          font-size: 1rem;
+  
+          &:focus {
+            border-color: #4caf50;
+            outline: none;
+          }
+        }
+  
+        textarea {
+          height: 100px;
+        }
+  
+        button {
+          margin-left: 10px;
+          background: none;
+          border: none;
+          cursor: pointer;
+  
+          svg {
+            font-size: 1.2rem;
+          }
+        }
+      }
+  
+      .skill-row,
+      .language-row,
+      .experience-row,
+      .reference-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr) auto;
+        gap: 10px;
+      }
+  
+      .date-row {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+  
+      .experience-row {
+        grid-template-columns: 1fr;
+      }
+  
+      .experience-row .date-row {
+        grid-column: span 2;
+      }
+    }
+  
+    button[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+  
+      &:hover {
+        background-color: #45a049;
+      }
+    }
+  
+    @media (max-width: 600px) {
+      padding: 10px;
+  
+      h1 {
+        font-size: 1.5rem;
+      }
+  
+      input,
+      textarea,
+      select {
+        font-size: 0.9rem;
+      }
+  
+      button[type="submit"] {
+        font-size: 0.9rem;
+      }
+  
+      .form-group {
+        flex-direction: column;
+  
+        button {
+          margin-top: 5px;
+        }
+      }
+  
+      .skill-row,
+      .language-row,
+      .experience-row,
+      .reference-row,
+      .date-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  }
+  
+  
+  
+  
+  
+  

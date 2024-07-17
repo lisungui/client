@@ -1,0 +1,30 @@
+.category-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+  
+    .category-item {
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+  
+      &.selected {
+        background-color: #45a049;
+      }
+  
+      &:hover {
+        background-color: #45a049;
+      }
+    }
+  
+    @media (max-width: 600px) {
+      .category-item {
+        padding: 8px 12px;
+      }
+    }
+  }  
