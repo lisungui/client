@@ -5,9 +5,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { auth } from "../../firebaseConfig";
 import { onAuthStateChanged, User, signOut } from "firebase/auth";
+import { categories } from "../shared/categories";
 
 interface FreelancerData {
   summary: string;
+  expertise: string[];
   skills: { skill: string; level: string }[];
   interests: string[];
   languages: { language: string; level: string }[];
@@ -27,6 +29,7 @@ interface FreelancerData {
 
 const initialFreelancerData: FreelancerData = {
   summary: "",
+  expertise: [],
   skills: [{ skill: "", level: "" }],
   interests: [],
   languages: [{ language: "", level: "" }],
@@ -108,7 +111,6 @@ const CreateFreelancerProfile: React.FC = () => {
       console.error("Error creating freelancer profile:", handleError(error));
     }
   };
-  
 
   return (
     <div className="create-freelancer-profile">
@@ -125,6 +127,31 @@ const CreateFreelancerProfile: React.FC = () => {
               required
             />
           </div>
+        </div>
+
+        <div className="form-section">
+          <h2>Expertise</h2>
+          {freelancerData.expertise.map((expertise, index) => (
+            <div key={index} className="form-group">
+              <select
+                name="expertise"
+                value={expertise}
+                onChange={(e) => handleChange(e, "expertise", index)}
+                required
+              >
+                <option value="">Select Expertise</option>
+                {categories.map((category) => (
+                  <option key={category} value={category}>{category}</option>
+                ))}
+              </select>
+              <button type="button" onClick={() => handleRemoveRow("expertise", index)}>
+                <FontAwesomeIcon icon={faTrashAlt} color="red" />
+              </button>
+            </div>
+          ))}
+          <button type="button" onClick={() => handleAddRow("expertise", "")}>
+            + Add another expertise
+          </button>
         </div>
 
         <div className="form-section">

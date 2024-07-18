@@ -45,7 +45,7 @@ const Header: React.FC<{ height?: string }> = (props) => {
 
   const handleNavigateFreelancer = () => {
     if (userData && userData.role === "freelancer") {
-      navigate("/freelancer");
+      navigate(`/freelancers/${user.uid}/details`);
     } else {
       navigate("/become-freelancer");
     }

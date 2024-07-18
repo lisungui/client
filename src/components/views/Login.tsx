@@ -4,7 +4,7 @@ import { signInWithPopup, signInWithEmailAndPassword } from "firebase/auth";
 import BaseContainer from "components/ui/BaseContainer";
 import { Button } from "components/ui/Button";
 import PropTypes from "prop-types";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle, faGithub } from "@fortawesome/free-brands-svg-icons"; // Import the icons
 import "styles/views/SignIn.scss"; // Import the updated SCSS file
@@ -36,11 +36,13 @@ const Login = () => {
   const [password, setPassword] = useState<string>(null);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
+  const location = useLocation();
+  const redirectTo = location.state?.redirectTo || "/home";
 
   const signInWithGoogle = async () => {
     try {
       await signInWithPopup(auth, googleProvider);
-      navigate("/home");
+      navigate(redirectTo);
     } catch (error) {
       console.error("Error signing in with Google", error);
     }
@@ -49,7 +51,7 @@ const Login = () => {
   const signInWithGithub = async () => {
     try {
       await signInWithPopup(auth, githubProvider);
-      navigate("/home");
+      navigate(redirectTo);
     } catch (error) {
       console.error("Error signing in with GitHub", error);
       setError(error.message);
@@ -60,7 +62,7 @@ const Login = () => {
     if (email && password) {
       try {
         await signInWithEmailAndPassword(auth, email, password);
-        navigate("/home");
+        navigate(redirectTo);
       } catch (error) {
         console.error("Error signing in with Email and Password", error);
         setError(error.message);
@@ -97,7 +99,7 @@ const Login = () => {
                 href="#"
                 onClick={(e) => {
                   e.preventDefault();
-                  navigate("/register");
+                  navigate("/register", { state: { redirectTo } });
                 }}
               >
                 Sign Up

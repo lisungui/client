@@ -1,64 +1,46 @@
-// src/components/services/MeetOurFreelancers.tsx
-
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { api, handleError } from "helpers/api";
 import "../../styles/views/MeetOurFreelancer.scss";
 
 interface Freelancer {
   id: string;
+  uid: string;
   name: string;
   picture: string;
-  expertise: string;
-  description: string;
+  expertise: string[];
+  summary: string;
 }
 
-// Dummy data for freelancers
-const dummyFreelancers = [
-  {
-    id: "1",
-    name: "Alice Johnson",
-    expertise: "Graphic Design",
-    picture: "https://randomuser.me/api/portraits/women/1.jpg",
-    description: "Alice is a creative graphic designer with over 5 years of experience."
-  },
-  {
-    id: "2",
-    name: "John Smith",
-    expertise: "Web Development",
-    picture: "https://randomuser.me/api/portraits/men/1.jpg",
-    description: "John is a skilled web developer who specializes in front-end technologies."
-  },
-  {
-    id: "3",
-    name: "Sara Davis",
-    expertise: "Digital Marketing",
-    picture: "https://randomuser.me/api/portraits/women/2.jpg",
-    description: "Sara is an expert in digital marketing strategies and social media management."
-  }
-];
-
 const MeetOurFreelancers: React.FC = () => {
-  const [freelancers, setFreelancers] = useState<Freelancer[]>(dummyFreelancers);
+  const [freelancers, setFreelancers] = useState<Freelancer[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
-  // Commented out useEffect since we're using dummy data
-  // useEffect(() => {
-  //   const fetchFreelancers = async () => {
-  //     setLoading(true);
-  //     setError(null);
-  //     try {
-  //       const response = await api.get("/freelancers");
-  //       setFreelancers(response.data);
-  //     } catch (error) {
-  //       console.error(`Failed to fetch freelancers: \n${handleError(error)}`);
-  //       setError("Failed to fetch freelancers. Please try again later.");
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
+  useEffect(() => {
+    const fetchFreelancers = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const response = await api.get("/api/freelancers/all");
+        setFreelancers(response.data);
+      } catch (error) {
+        console.error(`Failed to fetch freelancers: \n${handleError(error)}`);
+        setError("Failed to fetch freelancers. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  //   fetchFreelancers();
-  // }, []);
+    fetchFreelancers();
+  }, []);
+
+  const truncateSummary = (summary: string, maxLength: number) => {
+    if (summary.length <= maxLength) return summary;
+
+    return summary.split(" ").slice(0, maxLength).join(" ") + "...";
+  };
 
   if (loading) {
     return <div className="loading">Loading freelancers...</div>;
@@ -74,10 +56,16 @@ const MeetOurFreelancers: React.FC = () => {
       <div className="freelancers-list">
         {freelancers.map(freelancer => (
           <div key={freelancer.id} className="freelancer-profile">
-            <img src={freelancer.picture} alt={freelancer.name} className="freelancer-picture" />
-            <h3>{freelancer.name}</h3>
-            <p><strong>Expertise:</strong> {freelancer.expertise}</p>
-            <p className="description">{freelancer.description}</p>
+            <img src={freelancer.picture} alt={freelancer.fullName} className="freelancer-picture" />
+            <h3>{freelancer.fullName}</h3>
+            <p><strong>Expertise:</strong> {freelancer.expertise.join(", ")}</p>
+            <p className="description">{truncateSummary(freelancer.summary, 20)}</p>
+            <button 
+              className="view-detail-button" 
+              onClick={() => navigate(`/freelancers/${freelancer.id}/details`)}
+            >
+              View Details
+            </button>
           </div>
         ))}
       </div>
@@ -86,3 +74,4 @@ const MeetOurFreelancers: React.FC = () => {
 };
 
 export default MeetOurFreelancers;
+

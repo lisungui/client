@@ -1,0 +1,134 @@
+.freelancer-details-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    margin-top: 140px;
+    color: black; /* Set all text color to black */
+  
+    .freelancer-picture {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 20px;
+    }
+  
+    h2 {
+      margin-bottom: 10px;
+      color: black; /* Ensure heading text is black */
+    }
+  
+    p {
+      color: black; /* Ensure paragraph text is black */
+    }
+  
+    .skills {
+      text-align: left;
+      margin-top: 20px;
+      color: black; /* Ensure skills text is black */
+  
+      h3 {
+        margin-bottom: 10px;
+        color: black; /* Ensure sub-heading text is black */
+      }
+  
+      ul {
+        list-style-type: none;
+        padding: 0;
+  
+        li {
+          background-color: #f9f9f9;
+          padding: 10px;
+          margin-bottom: 5px;
+          border-radius: 5px;
+          color: black; /* Ensure list item text is black */
+        }
+      }
+    }
+  
+    .info-section {
+      text-align: left;
+      margin-top: 20px;
+      color: black;
+  
+      h3 {
+        margin-bottom: 10px;
+        color: black;
+      }
+  
+      ul {
+        list-style-type: none;
+        padding: 0;
+  
+        li {
+          background-color: #f9f9f9;
+          padding: 10px;
+          margin-bottom: 5px;
+          border-radius: 5px;
+          color: black;
+  
+          h4 {
+            margin: 0 0 5px 0;
+          }
+  
+          .portfolio-images {
+            display: flex;
+            gap: 10px;
+  
+            img {
+              max-width: 100px;
+              max-height: 100px;
+              object-fit: cover;
+              border-radius: 5px;
+            }
+          }
+        }
+  
+        strong {
+          display: block;
+        }
+  
+        p {
+          margin: 0;
+        }
+      }
+    }
+  
+    .contact-button,
+    .update-profile-button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      color: white; /* Button text color */
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+  
+      &:hover {
+        background-color: #45a049; /* Button background color on hover */
+      }
+    }
+  
+    .contact-button {
+      background-color: #4caf50; /* Button background color */
+    }
+  
+    .update-profile-button {
+      background-color: #2196f3; /* Update button background color */
+    }
+  
+    @media (max-width: 768px) {
+      .skills,
+      .info-section {
+        ul {
+          li {
+            padding: 8px;
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }  
+  
+  

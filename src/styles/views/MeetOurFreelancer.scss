@@ -1,117 +1,128 @@
-/* src/styles/services/MeetOurFreelancers.scss */
-
 .meet-our-freelancers-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-  
-    h2 {
-      font-size: 2.5rem;
-      color: #2e7d32;
-      margin-bottom: 30px;
-    }
-  
-    .freelancers-list {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-  
-      .freelancer-profile {
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-        padding: 20px;
-        max-width: 250px;
-        text-align: center;
-        transition: transform 0.3s, box-shadow 0.3s;
-  
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+
+  h2 {
+    font-size: 2.5rem;
+    color: #2e7d32;
+    margin-bottom: 30px;
+  }
+
+  .freelancers-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+
+    .freelancer-profile {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      max-width: 350px;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .freelancer-picture {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        margin-bottom: 15px;
+      }
+
+      h3 {
+        font-size: 1.5rem;
+        color: #2e7d32;
+        margin-bottom: 10px;
+      }
+
+      p {
+        font-size: 1rem;
+        color: #555;
+
+        &.description {
+          margin-top: 10px;
+          font-style: italic;
+        }
+      }
+
+      .view-detail-button {
+        background-color: #4caf50; /* Added background color */
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+
         &:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        }
-  
-        .freelancer-picture {
-          width: 100px;
-          height: 100px;
-          border-radius: 50%;
-          margin-bottom: 15px;
-        }
-  
-        h3 {
-          font-size: 1.5rem;
-          color: #2e7d32;
-          margin-bottom: 10px;
-        }
-  
-        p {
-          font-size: 1rem;
-          color: #555;
-  
-          &.description {
-            margin-top: 10px;
-            font-style: italic;
-          }
-        }
-      }
-    }
-  
-    // Media queries for responsiveness
-  
-    // Small devices (phones, less than 600px)
-    @media (max-width: 600px) {
-      .freelancers-list {
-        gap: 10px;
-  
-        .freelancer-profile {
-          padding: 15px;
-          max-width: 200px;
-  
-          .freelancer-picture {
-            width: 80px;
-            height: 80px;
-            margin-bottom: 10px;
-          }
-  
-          h3 {
-            font-size: 1.3rem;
-          }
-  
-          p {
-            font-size: 0.9rem;
-          }
-        }
-      }
-    }
-  
-    // Medium devices (tablets, 600px and up)
-    @media (min-width: 600px) and (max-width: 900px) {
-      .freelancers-list {
-        gap: 15px;
-  
-        .freelancer-profile {
-          padding: 18px;
-          max-width: 220px;
-  
-          .freelancer-picture {
-            width: 90px;
-            height: 90px;
-            margin-bottom: 12px;
-          }
-  
-          h3 {
-            font-size: 1.4rem;
-          }
-  
-          p {
-            font-size: 0.95rem;
-          }
+          background-color: #45a049;
         }
       }
     }
   }
-  
+
+  // Media queries for responsiveness
+
+  // Small devices (phones, less than 600px)
+  @media (max-width: 600px) {
+    .freelancers-list {
+      gap: 10px;
+
+      .freelancer-profile {
+        padding: 15px;
+        max-width: 200px;
+
+        .freelancer-picture {
+          width: 80px;
+          height: 80px;
+          margin-bottom: 10px;
+        }
+
+        h3 {
+          font-size: 1.3rem;
+        }
+
+        p {
+          font-size: 0.9rem;
+        }
+      }
+    }
+  }
+
+  // Medium devices (tablets, 600px and up)
+  @media (min-width: 600px) and (max-width: 900px) {
+    .freelancers-list {
+      gap: 15px;
+
+      .freelancer-profile {
+        padding: 18px;
+        max-width: 220px;
+
+        .freelancer-picture {
+          width: 90px;
+          height: 90px;
+          margin-bottom: 12px;
+        }
+
+        h3 {
+          font-size: 1.4rem;
+        }
+
+        p {
+          font-size: 0.95rem;
+        }
+      }
+    }
+  }
+}

@@ -1,10 +1,9 @@
-// Register.js
 import React, { useState } from "react";
 import { auth, googleProvider, githubProvider } from "../../firebaseConfig";
 import { signInWithPopup, createUserWithEmailAndPassword } from "firebase/auth";
 import BaseContainer from "components/ui/BaseContainer";
 import { Button } from "components/ui/Button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle, faGithub } from "@fortawesome/free-brands-svg-icons"; // Import the icons
 import "styles/views/SignIn.scss"; // Import the updated SCSS file
@@ -38,11 +37,13 @@ const Register = () => {
   const [password, setPassword] = useState<string>(null);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
+  const location = useLocation();
+  const redirectTo = location.state?.redirectTo || "/home";
 
   const signUpWithGoogle = async () => {
     try {
       await signInWithPopup(auth, googleProvider);
-      navigate("/home");
+      navigate(redirectTo);
     } catch (error) {
       console.error("Error signing up with Google", error);
     }
@@ -51,7 +52,7 @@ const Register = () => {
   const signUpWithGithub = async () => {
     try {
       await signInWithPopup(auth, githubProvider);
-      navigate("/home");
+      navigate(redirectTo);
     } catch (error) {
       console.error("Error signing up with GitHub", error);
       setError(error.message);
@@ -63,7 +64,7 @@ const Register = () => {
       try {
         await createUserWithEmailAndPassword(auth, email, password);
         console.log("Signed up with Email and Password");
-        navigate("/home");
+        navigate(redirectTo);
       } catch (error) {
         console.error("Error signing up with Email and Password...", error);
         if (error.code === "auth/invalid-email") {
@@ -112,7 +113,7 @@ const Register = () => {
                 href="#"
                 onClick={(e) => {
                   e.preventDefault();
-                  navigate("/login");
+                  navigate("/login", { state: { redirectTo } });
                 }}
               >
                 Login

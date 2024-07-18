@@ -32,6 +32,7 @@ import CreatePost from "../../views/CreatePost";
 import ForumPage from "../../views/ForumPage";
 import PortfolioPage from "../../views/PortfolioPage";
 import PortfolioIntroduction from "../../views/PortfolioIntroduction";
+import FreelancerDetails from "../../views/FreelancerDetails";
 
 const AppRouter = () => {
   return (
@@ -58,6 +59,13 @@ const AppRouter = () => {
           <Route 
             path="*" 
             element={<NotFound />} 
+          />
+
+          <Route
+            path="/freelancers/:id/details"
+            element={
+              <FreelancerDetails />
+            }
           />
 
           <Route
