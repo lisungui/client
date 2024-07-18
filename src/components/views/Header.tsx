@@ -60,6 +60,19 @@ const Header: React.FC<{ height?: string }> = (props) => {
     }
   };
 
+  const handleNavigatePortfolio = async () => {
+    if (user) {
+      try {
+        await api.get(`/api/portfolios/${user.uid}`);
+        navigate("/portfolio");
+      } catch (error) {
+        if (error.response && error.response.status === 404) {
+          navigate("/portfolio/introduction");
+        }
+      }
+    }
+  };
+
   return (
     <div className="header" style={{ height: props.height }}>
       <div className="left-section" onClick={navigateToHome} style={{ cursor: "pointer" }}>
@@ -86,6 +99,11 @@ const Header: React.FC<{ height?: string }> = (props) => {
             <Button onClick={() => navigate("/messages")} className="nav-button">
               Messages
             </Button>
+            {userData && userData.role === "freelancer" && (
+              <Button onClick={handleNavigatePortfolio} className="nav-button">
+                Portfolio
+              </Button>
+            )}
           </>
         )}
         <Button onClick={() => navigate("/contact")} className="nav-button">

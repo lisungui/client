@@ -1,0 +1,120 @@
+.portfolio-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    margin-top: 140px;
+  
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  
+    .add-button {
+      display: block;
+      margin: 0 auto 20px;
+      padding: 10px 20px;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+  
+      &:hover {
+        background-color: #45a049;
+      }
+    }
+  
+    .portfolio-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+  
+      .portfolio-item {
+        position: relative; /* Add this line to use relative positioning */
+        flex: 1 1 calc(33.333% - 20px);
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  
+        h2 {
+          margin-top: 0;
+          font-weight: bold;
+          color: black; /* Set title color to bold black */
+        }
+  
+        p {
+          color: black;
+        }
+  
+        .images {
+          display: flex;
+          gap: 10px;
+          margin-bottom: 10px;
+  
+          img {
+            max-width: 100px;
+            max-height: 100px;
+            object-fit: cover;
+            border-radius: 5px;
+          }
+        }
+  
+        a {
+          display: block;
+          margin-bottom: 10px;
+          color: #4caf50;
+          text-decoration: none;
+  
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+  
+        .button-container {
+          position: absolute; /* Add this line to position the buttons */
+          top: 10px; /* Position the buttons at the top */
+          right: 10px; /* Position the buttons at the right */
+          display: flex;
+          gap: 10px; /* Add space between buttons */
+  
+          .edit-button, .delete-button {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+  
+            &.edit-button {
+              background-color: #2196f3;
+              color: white;
+  
+              &:hover {
+                background-color: #1e88e5;
+              }
+            }
+  
+            &.delete-button {
+              background-color: #f44336;
+              color: white;
+  
+              &:hover {
+                background-color: #e53935;
+              }
+            }
+          }
+        }
+      }
+    }
+  
+    @media (max-width: 768px) {
+      .portfolio-list {
+        flex-direction: column;
+  
+        .portfolio-item {
+          flex: 1 1 100%;
+        }
+      }
+    }
+  }  
+
+  

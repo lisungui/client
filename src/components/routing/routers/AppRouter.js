@@ -30,6 +30,8 @@ import Freelancing from "../../views/Freelancing";
 import CreateFreelancerProfile from "../../views/CreateFreelancerProfile";
 import CreatePost from "../../views/CreatePost";
 import ForumPage from "../../views/ForumPage";
+import PortfolioPage from "../../views/PortfolioPage";
+import PortfolioIntroduction from "../../views/PortfolioIntroduction";
 
 const AppRouter = () => {
   return (
@@ -63,6 +65,24 @@ const AppRouter = () => {
             element={
               <RequiredAuth>
                 <Messages />
+              </RequiredAuth>
+            }
+          />
+
+          <Route
+            path="/portfolio/introduction"
+            element={
+              <RequiredAuth>
+                <PortfolioIntroduction />
+              </RequiredAuth>
+            }
+          />
+
+          <Route
+            path="/portfolio"
+            element={
+              <RequiredAuth>
+                <PortfolioPage />
               </RequiredAuth>
             }
           />
