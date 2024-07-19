@@ -1,30 +1,100 @@
 .post-list {
-    .post-item {
-      background-color: #fff;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      padding: 10px;
+  .post-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
+    h3 {
+      margin: 0 0 10px;
+      color: #333;
+      font-size: 1.5rem;
+    }
+
+    .category {
+      color: #4caf50;
+      font-weight: bold;
       margin-bottom: 10px;
-  
+    }
+
+    p {
+      margin: 5px 0;
+      font-size: 1rem;
+      color: #555;
+    }
+
+    .post-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+      
+      .votes {
+        display: flex;
+        align-items: center;
+
+        .vote-button {
+          background: none;
+          border: none;
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+          color: #888;
+          font-size: 1rem;
+          margin-right: 10px;
+          transition: color 0.3s;
+
+          &.upvote.voted {
+            color: #4caf50; /* Color for upvoted button */
+          }
+
+          &.downvote.voted {
+            color: #f44336; /* Color for downvoted button */
+          }
+
+          &:hover {
+            color: #4caf50;
+          }
+
+          &.downvote:hover {
+            color: #f44336;
+          }
+
+          span {
+            margin-left: 5px;
+          }
+        }
+      }
+
+      .timestamp {
+        font-size: 0.8rem;
+        color: #888;
+      }
+    }
+  }
+
+  @media (max-width: 600px) {
+    .post-item {
+      padding: 15px;
+      
       h3 {
-        margin: 0;
-        color: #4caf50;
+        font-size: 1.2rem;
       }
-  
+
       p {
-        margin: 5px 0 0;
+        font-size: 0.9rem;
       }
-    }
-  
-    @media (max-width: 600px) {
-      .post-item {
-        h3 {
-          font-size: 1.2rem;
-        }
-  
-        p {
-          font-size: 0.9rem;
+
+      .post-footer {
+        flex-direction: column;
+        align-items: flex-start;
+
+        .timestamp {
+          margin-top: 10px;
         }
       }
     }
-  }   
+  }
+}

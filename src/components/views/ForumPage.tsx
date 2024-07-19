@@ -3,21 +3,8 @@ import "../../styles/views/ForumPage.scss";
 import { api, handleError } from "helpers/api";
 import CreatePost from "./CreatePost";
 import PostList from "./PostList";
-import CategoryFilter from "./CategoryFilter";
 import SearchBar from "./SearchBar";
-
-const categories = [
-  "Web Development",
-  "Mobile Development",
-  "Graphic Design",
-  "Digital Marketing",
-  "Writing & Translation",
-  "Video & Animation",
-  "Music & Audio",
-  "Programming & Tech",
-  "Business",
-  "Lifestyle"
-];
+import { categories } from "../shared/categories";
 
 const ForumPage: React.FC = () => {
   const [posts, setPosts] = useState<any[]>([]);
@@ -47,7 +34,7 @@ const ForumPage: React.FC = () => {
     let tempPosts = posts;
 
     if (selectedCategory) {
-      tempPosts = tempPosts.filter(post => post.category === selectedCategory);
+      tempPosts = tempPosts.filter(post => post.categoryId === selectedCategory);
     }
 
     if (searchQuery) {
@@ -63,13 +50,23 @@ const ForumPage: React.FC = () => {
     <div className="forum-page">
       <h1>Community Forum</h1>
       <SearchBar query={searchQuery} onSearch={setSearchQuery} />
-      <CategoryFilter
-        categories={categories}
-        selectedCategory={selectedCategory}
-        onSelectCategory={setSelectedCategory}
-      />
+      <div className="filter-section">
+        <label className="filter-label">Filter By:</label>
+        <select
+          className="category-select"
+          value={selectedCategory || ""}
+          onChange={(e) => setSelectedCategory(e.target.value || null)}
+        >
+          <option value="">All Categories</option>
+          {categories.map((category, index) => (
+            <option key={index} value={category}>
+              {category}
+            </option>
+          ))}
+        </select>
+      </div>
       <CreatePost />
-      <PostList posts={filteredPosts} />
+      <PostList posts={filteredPosts} setPosts={setPosts} />
     </div>
   );
 };
