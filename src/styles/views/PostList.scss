@@ -1,41 +1,101 @@
-.post-list {
-  .post-item {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    
-    h3 {
-      margin: 0 0 10px;
-      color: #333;
-      font-size: 1.5rem;
-    }
+.post-list-container {
+  position: relative;
 
-    .category {
-      color: #4caf50;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
+  .post-list {
+    .post-item {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
-    p {
-      margin: 5px 0;
-      font-size: 1rem;
-      color: #555;
-    }
-
-    .post-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 10px;
-      
-      .votes {
+      .post-user-info {
         display: flex;
         align-items: center;
+        margin-bottom: 10px;
 
-        .vote-button {
+        .post-user-picture {
+          width: 50px; 
+          height: 50px;
+          border-radius: 50%;
+          margin-right: 10px;
+        }
+
+        .post-user-icon {
+          font-size: 50px;
+          color: #888;
+          margin-right: 10px;
+        }
+
+        .post-user-name {
+          font-size: 1rem;
+          color: #333;
+        }
+      }
+      
+      h3 {
+        margin: 0 0 10px;
+        color: #333;
+        font-size: 1.5rem;
+      }
+
+      .category {
+        color: #4caf50;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      p {
+        margin: 5px 0;
+        font-size: 1rem;
+        color: #555;
+      }
+
+      .post-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 10px;
+
+        .votes {
+          display: flex;
+          align-items: center;
+
+          .vote-button {
+            background: none;
+            border: none;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            color: #888;
+            font-size: 1rem;
+            margin-right: 10px;
+            transition: color 0.3s;
+
+            &.upvote.voted {
+              color: #4caf50; /* Color for upvoted button */
+            }
+
+            &.downvote.voted {
+              color: #f44336; /* Color for downvoted button */
+            }
+
+            &:hover {
+              color: #4caf50;
+            }
+
+            &.downvote:hover {
+              color: #f44336;
+            }
+
+            span {
+              margin-left: 5px;
+            }
+          }
+        }
+
+        .reply-button {
           background: none;
           border: none;
           display: flex;
@@ -43,56 +103,88 @@
           cursor: pointer;
           color: #888;
           font-size: 1rem;
-          margin-right: 10px;
           transition: color 0.3s;
-
-          &.upvote.voted {
-            color: #4caf50; /* Color for upvoted button */
-          }
-
-          &.downvote.voted {
-            color: #f44336; /* Color for downvoted button */
-          }
 
           &:hover {
             color: #4caf50;
           }
+        }
 
-          &.downvote:hover {
-            color: #f44336;
-          }
+        .timestamp {
+          font-size: 0.8rem;
+          color: #888;
+        }
+      }
 
-          span {
-            margin-left: 5px;
+      .reply-box {
+        margin-top: 10px;
+        textarea {
+          width: 100%;
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          margin-bottom: 10px;
+          font-size: 1rem;
+        }
+        .reply-actions {
+          display: flex;
+          justify-content: flex-end;
+          button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-left: 10px;
+            &:hover {
+              background-color: #4caf50;
+              color: white;
+            }
+            &.cancel-button {
+              background-color: #f44336;
+              color: white;
+              &:hover {
+                background-color: #e53935;
+              }
+            }
           }
         }
       }
 
-      .timestamp {
-        font-size: 0.8rem;
-        color: #888;
+      .reply-item {
+        margin-top: 10px;
+        padding-left: 20px;
+        border-left: 2px solid #ddd;
+        .post-user-info {
+          margin-bottom: 5px;
+        }
+        p {
+          margin: 5px 0;
+          font-size: 1rem;
+          color: #555;
+        }
       }
     }
-  }
 
-  @media (max-width: 600px) {
-    .post-item {
-      padding: 15px;
-      
-      h3 {
-        font-size: 1.2rem;
-      }
+    @media (max-width: 600px) {
+      .post-item {
+        padding: 15px;
 
-      p {
-        font-size: 0.9rem;
-      }
+        h3 {
+          font-size: 1.2rem;
+        }
 
-      .post-footer {
-        flex-direction: column;
-        align-items: flex-start;
+        p {
+          font-size: 0.9rem;
+        }
 
-        .timestamp {
-          margin-top: 10px;
+        .post-footer {
+          flex-direction: column;
+          align-items: flex-start;
+
+          .timestamp {
+            margin-top: 10px;
+          }
         }
       }
     }
