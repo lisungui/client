@@ -2,7 +2,7 @@ import axios from "axios";
 import { getDomain } from "helpers/getDomain";
 
 export const api = axios.create({
-  baseURL: getDomain(),
+  baseURL: "http://ec2-51-20-77-139.eu-north-1.compute.amazonaws.com:8080",
   headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
 });
 
