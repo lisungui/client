@@ -28,7 +28,7 @@ const CreatePost: React.FC = () => {
 
   const handleCreatePost = async () => {
     if (!user) {
-      navigate("/login", { state: { redirectTo: "/forum/create" } });
+      navigate("/login", { state: { redirectTo: "/forum" } });
 
       return;
     }
