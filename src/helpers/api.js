@@ -41,6 +41,7 @@ export const handleError = error => {
   } else {
     // General error handling
     console.log("An unknown error occurred.", error);
+    
     return "An unknown error occurred.";
   }
 };
