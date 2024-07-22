@@ -17,6 +17,7 @@ const ForumPage: React.FC = () => {
       try {
         const response = await api.get("/api/forum/posts");
         setPosts(response.data);
+        console.log("All posts fetched:", response.data);
         setFilteredPosts(response.data);
       } catch (error) {
         console.error("Failed to fetch posts:", handleError(error));
