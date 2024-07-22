@@ -3,7 +3,7 @@ import { getDomain } from "helpers/getDomain";
 
 export const api = axios.create({
   baseURL: getDomain(),
-  headers: { "Content-Type": "application/json" }
+  headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
 });
 
 export const handleError = error => {
@@ -41,7 +41,7 @@ export const handleError = error => {
   } else {
     // General error handling
     console.log("An unknown error occurred.", error);
-    
+
     return "An unknown error occurred.";
   }
 };
